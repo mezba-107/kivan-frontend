@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Add Product</title>
+
+  <!-- ✅ Page CSS -->
+  <link rel="stylesheet" href="/Admin/add-product.css">
+  <link rel="stylesheet" href="/Admin/admin-nav.css">
+</head>
+<body>
+
+  <!-- ✅ Admin Navbar -->
+  <div id="admin-navbar"></div>
+
+  <h2>➕ Add New Product</h2>
+
+  <!-- ✅ Add Product Form -->
+  <form id="productForm">
+
+    <!-- Product Name -->
+    <input type="text" id="name" placeholder="Product Name" required />
+
+    <!-- Price -->
+    <input type="number" id="price" placeholder="Price" required />
+
+    <!-- Description -->
+    <textarea id="description" placeholder="Description"></textarea>
+
+
+    <!-- Category -->
+<select id="category" required>
+  <option value="">Select Category</option>
+  <option value="sneakers">Sneakers</option>
+  <option value="tshirt">T-Shirt</option>
+  <option value="pant">Pant</option>
+</select>
+
+
+    <!-- ========================= -->
+    <!-- ✅ MAIN PRODUCT IMAGE -->
+    <!-- ========================= -->
+    <label>Product Image</label>
+    <input type="file" id="image" accept="image/*" required />
+
+    <!-- ✅ MAIN IMAGE PREVIEW -->
+    <img
+      id="imagePreview"
+      style="
+        display:none;
+        width:200px;
+        height:200px;
+        object-fit:cover;
+        border-radius:10px;
+        margin-top:10px;
+      "
+    />
+
+    <!-- ========================= -->
+    <!-- ✅ PRODUCT GALLERY -->
+    <!-- ========================= -->
+    <label>Product Gallery Images</label>
+    <input
+  type="file"
+  id="gallery"
+  name="gallery"
+  accept="image/*"
+  multiple
+/>
+
+
+    <!-- ✅ GALLERY PREVIEW (NEW) -->
+    <div
+      id="galleryPreview"
+      style="
+        display:flex;
+        gap:10px;
+        flex-wrap:wrap;
+        margin-top:10px;
+      "
+    ></div>
+
+    <!-- Submit -->
+    <button type="submit">✅ Add Product</button>
+
+  </form>
+
+  <!-- Message -->
+  <p id="msg"></p>
+
+  <!-- JS -->
+  <script src="/Admin/admin-nav.js"></script>
+  <script src="/Admin/add-product.js"></script>
+
+</body>
+</html>

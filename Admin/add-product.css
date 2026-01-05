@@ -1,0 +1,186 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+/* ===== ADMIN ADD PRODUCT PAGE ===== */
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Segoe UI", sans-serif;
+  background: #0b1020;
+  color: #eee;
+}
+
+h2 {
+  text-align: center;
+  margin-top: 40px;
+  color: #ff523b; /* ✅ brand color */
+}
+
+form {
+  width: 420px;
+  margin: 40px auto;
+  padding: 30px;
+  background: #0b1020;
+  border-radius: 14px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Inputs */
+input,
+textarea {
+  background: transparent;
+  border: 1px solid #333;
+  border-radius: 8px;
+  padding: 12px;
+  color: #eee;
+  font-size: 14px;
+  outline: none;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #777;
+}
+
+input:focus,
+textarea:focus {
+  border-color: #ff523b;
+  box-shadow: 0 0 0 1px #ff523b;
+}
+
+textarea {
+  resize: none;
+  height: 90px;
+}
+
+/* Button */
+button {
+  margin-top: 10px;
+  padding: 12px;
+  background: linear-gradient(135deg, #ff523b, #e63b25);
+  border: none;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  color: white;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(255,82,59,0.45);
+}
+
+/* Message */
+#msg {
+  text-align: center;
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+
+
+/* ===============================
+   🌟 BEAUTIFUL FILE INPUT BUTTON
+================================ */
+input[type="file"] {
+  background: #12182f;
+  border: 1px dashed #3a3f70;
+  border-radius: 12px;
+  padding: 12px;
+  color: #aaa;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+/* File Button */
+input[type="file"]::file-selector-button {
+  background: linear-gradient(135deg, #1f244a, #14182e);
+  color: #fff;
+  border: none;
+  border-radius: 50px;
+  padding: 10px 20px;
+  margin-right: 12px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+
+  box-shadow: 0 4px 15px rgba(0,0,0,0.35);
+  transition: 0.25s ease;
+}
+
+/* Hover */
+input[type="file"]::file-selector-button:hover {
+  background: linear-gradient(135deg, #ff523b, #e63927);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(255,82,59,0.45);
+}
+
+/* hover border glow */
+input[type="file"]:hover {
+  border-color: #ff523b;
+  box-shadow: 0 0 15px rgba(255,82,59,0.3);
+}
+
+
+
+/* ===============================
+   🌟 BEAUTIFUL CATEGORY SELECT
+================================ */
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  background: linear-gradient(135deg, #12183a, #0b1020);
+  border: 1px solid #2a2f55;
+  border-radius: 12px;
+
+  padding: 14px 44px 14px 14px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #fff;
+
+  cursor: pointer;
+  outline: none;
+  transition: all 0.25s ease;
+
+  /* arrow icon */
+  background-image:
+    linear-gradient(45deg, transparent 50%, #ff523b 50%),
+    linear-gradient(135deg, #ff523b 50%, transparent 50%);
+  background-position:
+    calc(100% - 22px) calc(1.2em),
+    calc(100% - 16px) calc(1.2em);
+  background-size:
+    6px 6px,
+    6px 6px;
+  background-repeat: no-repeat;
+}
+
+/* hover */
+select:hover {
+  border-color: #ff523b;
+  box-shadow: 0 0 18px rgba(255, 82, 59, 0.35);
+}
+
+/* focus */
+select:focus {
+  border-color: #ff523b;
+  box-shadow: 0 0 0 2px rgba(255, 82, 59, 0.35);
+}
+
+/* options */
+select option {
+  background: #0b1020;
+  color: #fff;
+  padding: 10px;
+}

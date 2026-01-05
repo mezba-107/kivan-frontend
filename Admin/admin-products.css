@@ -1,0 +1,311 @@
+/* ================= RESET ================= */
+/* ✅ browser default margin/padding remove */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ================= BODY ================= */
+/* ✅ full dark admin background */
+body {
+  background: #0b1020;
+  color: #ffffff;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* ================= ADMIN NAV ================= */
+/* ✅ navbar always top */
+.admin-nav {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+/* ================= PAGE TITLE ================= */
+/* ✅ All Products heading */
+h2 {
+  margin: 26px 0;
+  text-align: center;
+  color: #ff523b;
+  font-size: 26px;
+  font-weight: 700;
+}
+
+/* ================= PRODUCTS CONTAINER ================= */
+/* ✅ center + width control */
+#products {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding-bottom: 50px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+/* ================= PRODUCT CARD ================= */
+/* ✅ full product box */
+.product-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+
+  padding: 22px;
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+
+  transition: all 0.3s ease;
+}
+
+/* ✅ hover effect */
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 0 30px rgba(255, 82, 59, 0.35);
+}
+
+/* ================= PRODUCT IMAGE ================= */
+/* ✅ image fixed size — layout break হবে না */
+.product-card img {
+  width: 220px;
+  height: 160px;
+  border-radius: 14px;
+  object-fit: cover;
+  flex-shrink: 0;
+  background: #111;
+}
+
+/* ================= PRODUCT INFO ================= */
+/* ✅ right side content */
+.product-info {
+  flex: 1;
+}
+
+/* ✅ product name */
+.product-name {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+/* ✅ description wrap fix */
+.product-desc {
+  font-size: 14px;
+  opacity: 0.85;
+  line-height: 1.5;
+  margin: 8px 0 12px;
+
+  /* ✅ MAIN FIX */
+  word-break: break-all;        /* qqqqqqq টাইপ text ভাঙবে */
+  overflow-wrap: anywhere;     /* modern browser support */
+  white-space: normal;
+}
+
+
+/* ✅ product price */
+.product-price {
+  color: #ff523b;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 14px;
+}
+
+/* ================= DELETE BUTTON ================= */
+.delete-btn {
+  background: transparent;
+  border: 1px solid #ff523b;
+  color: #ff523b;
+
+  padding: 7px 20px;
+  border-radius: 999px;
+  cursor: pointer;
+
+  font-size: 14px;
+  font-weight: 500;
+
+  transition: all 0.25s ease;
+}
+
+/* ✅ hover */
+.delete-btn:hover {
+  background: #ff523b;
+  color: white;
+  box-shadow: 0 4px 16px rgba(255, 82, 59, 0.6);
+}
+
+/* ================= DELETE ANIMATION ================= */
+/* ✅ smooth remove animation */
+.product-card.removing {
+  opacity: 0;
+  transform: translateX(50px);
+  transition: all 0.4s ease;
+}
+
+/* ================= RESPONSIVE ================= */
+/* ✅ mobile support */
+@media (max-width: 700px) {
+
+  #products {
+    padding: 0 14px 40px;
+  }
+
+  .product-card {
+    flex-direction: column;
+  }
+
+  .product-card img {
+    width: 100%;
+    height: 180px;
+  }
+
+}
+
+
+/* ✅ EDIT BUTTON */
+.edit-btn {
+  background: transparent;
+  border: 1px solid #4da3ff;
+  color: #4da3ff;
+  padding: 6px 18px;
+  border-radius: 99px;
+  cursor: pointer;
+  margin-right: 10px;
+  transition: 0.25s;
+}
+
+.edit-btn:hover {
+  background: #4da3ff;
+  color: white;
+  box-shadow: 0 4px 14px rgba(77, 163, 255, 0.5);
+}
+
+
+
+
+/* =========================
+   PRODUCT GALLERY (ADMIN)
+========================= */
+
+.product-gallery {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+
+.product-gallery img {
+  width: 70px;          /* 🔹 একটু বড় */
+  height: 70px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid #333;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.product-gallery img:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 10px rgba(255, 82, 59, 0.6);
+}
+
+.product-img {
+  display: block;
+  margin-bottom: 8px;
+}
+
+
+
+
+/* ==========================
+   🔥 CUSTOM DELETE POPUP
+========================== */
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.75);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  backdrop-filter: blur(4px);
+}
+
+.modal-box {
+  background: #0f1429;
+  padding: 28px;
+  width: 350px;
+  border-radius: 16px;
+
+  text-align: center;
+  border: 1px solid rgba(255, 82, 59, 0.4);
+
+  box-shadow: 0 0 30px rgba(255, 82, 59, 0.35);
+  animation: popupShow 0.3s ease;
+}
+
+.modal-box h3 {
+  color: #ff523b;
+  margin-bottom: 10px;
+  font-size: 20px;
+}
+
+.modal-box p {
+  color: #ccc;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.yes-btn {
+  background: #ff523b;
+  border: none;
+  color: white;
+  padding: 10px 22px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.yes-btn:hover {
+  background: #ff2d1a;
+  box-shadow: 0 0 12px rgba(255, 82, 59, 0.6);
+}
+
+.no-btn {
+  background: transparent;
+  border: 1px solid #666;
+  color: #ddd;
+  padding: 10px 22px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s ease;
+  box-shadow: 0 0 0px rgba(255, 255, 255, 0);   /* default no glow */
+}
+
+.no-btn:hover {
+  border-color: #bbb;
+  color: white;
+  box-shadow: 0 0 12px rgba(200, 200, 255, 0.4);  /* soft white glow */
+  transform: translateY(-2px);                   /* slight lift */
+}
+
+@keyframes popupShow {
+  from {
+    transform: scale(0.7);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

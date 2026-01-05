@@ -1,0 +1,354 @@
+/* ===============================
+   ✅ RESET / BASE
+================================ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #0b1020;
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+}
+
+/* ===============================
+   ✅ PAGE WRAPPER
+   nav এর নিচে spacing দেয়
+================================ */
+#ordersContainer,
+h2 {
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+/* ===============================
+   ✅ PAGE TITLE
+   📦 All Orders (Admin)
+================================ */
+h2 {
+  margin-top: 32px;           /* nav এর নিচে gap */
+  margin-bottom: 26px;
+  text-align: center;
+  font-size: 26px;
+  font-weight: 600;
+  color: #ff523b;
+  letter-spacing: 0.4px;
+}
+
+/* ===============================
+   ✅ ORDER CARD
+   main box (Add Product style)
+================================ */
+.order-card {
+  background: rgba(255,255,255,0.05);
+  border-radius: 18px;
+  padding: 22px 26px;
+  margin-bottom: 22px;
+  border: 1px solid rgba(255,255,255,0.08);
+  transition: all 0.35s ease;
+}
+
+/* hover effect */
+.order-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 40px rgba(255, 82, 59, 0.35);
+}
+
+/* ===============================
+   ✅ TOP PART (customer + status)
+================================ */
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 14px;
+}
+
+/* ===============================
+   ✅ CUSTOMER INFO
+================================ */
+.customer-info {
+  font-size: 14px;
+  line-height: 1.5;
+  color: #ddd;
+}
+
+.customer-info b {
+  font-size: 15px;
+  color: white;
+}
+
+.customer-info small {
+  opacity: 0.7;
+}
+
+/* ===============================
+   ✅ STATUS SELECT (pill style)
+================================ */
+select {
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: none;
+  outline: none;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  background: linear-gradient(135deg, #ff523b, #ff7a4f);
+  color: white;
+}
+
+select option {
+  background: #0b1020;     /* dark background */
+  color: white;           /* text white */
+}
+
+/* ===============================
+   ✅ ORDER ITEM LIST
+================================ */
+.order-card ul {
+  margin: 14px 0;
+  padding-left: 18px;
+}
+
+.order-card li {
+  font-size: 14px;
+  margin-bottom: 6px;
+  color: #eee;
+}
+
+/* ===============================
+   ✅ TOTAL AMOUNT
+================================ */
+.order-card b {
+  display: inline-block;
+  margin-top: 6px;
+  font-size: 15px;
+}
+
+/* ===============================
+   ✅ ADMIN ACTIONS
+================================ */
+.admin-actions {
+  margin-top: 16px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* ===============================
+   ✅ DELETE / CANCEL BUTTON
+================================ */
+.delete-btn {
+  background: transparent;
+  color: #ff5c5c;
+  border: 1px solid rgba(255,92,92,0.45);
+  padding: 7px 18px;
+  font-size: 13px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.25s ease;
+}
+
+.delete-btn:hover {
+  background: rgba(255,92,92,0.14);
+  box-shadow: 0 0 18px rgba(255,92,92,0.35);
+  transform: translateY(-2px);
+}
+
+.delete-btn:active {
+  transform: scale(0.92);
+}
+
+/* ===============================
+   ✅ DELETE ANIMATION
+================================ */
+.order-card.removing {
+  opacity: 0;
+  transform: translateX(40px);
+  height: 0;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  transition: all 0.35s ease;
+}
+
+/* ===============================
+   ✅ EMPTY STATE
+================================ */
+#ordersContainer p {
+  text-align: center;
+  opacity: 0.6;
+  margin-top: 40px;
+}
+
+
+
+/* ===============================
+   ✅ INVOICE BUTTON (ADMIN)
+================================ */
+.invoice-btn {
+  text-decoration: none;
+  padding: 7px 18px;
+  font-size: 13px;
+  border-radius: 999px;
+  font-weight: 600;
+  color: #0b1020;
+  background: linear-gradient(135deg, #00ffcc, #00c3ff);
+  margin-right: 12px;
+  transition: all 0.25s ease;
+  box-shadow: 0 0 14px rgba(0, 255, 204, 0.45);
+}
+
+.invoice-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 24px rgba(0, 255, 204, 0.85);
+}
+
+.invoice-btn:active {
+  transform: scale(0.92);
+}
+
+
+
+
+
+
+
+
+
+
+
+/* ===============================
+   ✅ CONFIRM POPUP OVERLAY
+================================ */
+.confirm-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(6px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+/* ===============================
+   ✅ POPUP BOX
+================================ */
+.confirm-box {
+  background: rgba(15, 20, 40, 0.95);
+  border-radius: 18px;
+  padding: 26px 30px;
+  width: 360px;
+  text-align: center;
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 25px 60px rgba(0,0,0,0.6);
+  animation: popupIn 0.35s ease;
+}
+
+@keyframes popupIn {
+  from {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.confirm-box h3 {
+  color: #ff5c5c;
+  margin-bottom: 10px;
+}
+
+.confirm-box p {
+  font-size: 14px;
+  opacity: 0.85;
+  margin-bottom: 22px;
+}
+
+/* ===============================
+   ✅ POPUP BUTTONS
+================================ */
+.confirm-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.btn {
+  flex: 1;
+  padding: 10px 0;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  background: rgba(255,255,255,0.1);
+  color: white;
+  transition: all 0.25s ease;
+}
+
+.btn:hover {
+  background: rgba(255,255,255,0.2);
+}
+
+.btn.danger {
+  background: linear-gradient(135deg, #ff5c5c, #ff2f2f);
+  box-shadow: 0 0 20px rgba(255,92,92,0.55);
+}
+
+.btn.danger:hover {
+  box-shadow: 0 0 30px rgba(255,92,92,0.85);
+  transform: translateY(-1px);
+}
+
+
+/* ===============================
+   ✅ NO BUTTON HOVER GLOW
+================================ */
+#confirmNo {
+  position: relative;
+}
+
+#confirmNo:hover {
+  background: rgba(255, 255, 255, 0.18);
+  box-shadow:
+    0 0 12px rgba(255, 255, 255, 0.35),
+    0 0 25px rgba(255, 255, 255, 0.15);
+  transform: translateY(-1px);
+}
+
+
+
+
+/* ===============================
+   ✅ CANCEL REQUEST ICON
+================================ */
+.order-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.cancel-req-icon {
+  position: relative;
+  font-size: 20px;
+  cursor: pointer;
+  filter: drop-shadow(0 0 6px rgba(255, 82, 59, 0.6));
+}
+
+/* 🔴 Red dot */
+.cancel-req-icon .dot {
+  position: absolute;
+  top: -3px;
+  right: -4px;
+  width: 9px;
+  height: 9px;
+  background: #ff3b3b;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(255, 59, 59, 0.9);
+}

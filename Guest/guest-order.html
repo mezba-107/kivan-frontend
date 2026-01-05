@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guest Checkout</title>
+
+    <link rel="stylesheet" href="/Guest/guest-order.css">
+</head>
+<body>
+
+<div class="guest-container">
+
+    <h2 class="title">🛒 Guest Checkout</h2>
+    <p class="sub">You are ordering as a guest. No login required.</p>
+
+    <form id="guestOrderForm">
+
+        <div class="input-box">
+            <label>Full Name</label>
+            <input type="text" id="guestName" placeholder="Enter your full name" required>
+        </div>
+
+        <div class="input-box">
+            <label>Phone Number</label>
+            <input type="text" id="guestPhone" placeholder="01xxxxxxxxx" required>
+        </div>
+
+        <div class="input-box">
+            <label>Select City</label>
+            <select id="guestCity" required>
+                <option value="">Select your city</option>
+                <option>Dhaka</option>
+                <option>Chittagong</option>
+                <option>Rajshahi</option>
+                <option>Khulna</option>
+                <option>Barishal</option>
+                <option>Mymensingh</option>
+                <option>Rangpur</option>
+                <option>Sylhet</option>
+                <option>Narayanganj</option>
+                <option>Gazipur</option>
+                <option>Cumilla</option>
+                <option>Jessore</option>
+                <option>Bogra</option>
+                <option>Savar</option>
+                <option>Feni</option>
+                <option>Brahmanbaria</option>
+                <option>Noakhali</option>
+                <option>Dinajpur</option>
+                <option>Pabna</option>
+                <option>Kushtia</option>
+                <option>Cox’s Bazar</option>
+            </select>
+        </div>
+
+        <div class="input-box">
+            <label>Full Address</label>
+            <textarea id="guestAddress" placeholder="House, Road, Block..." required></textarea>
+        </div>
+
+        <div class="input-box">
+            <label>Shipping Method</label>
+            <select id="shippingMethod" required>
+                <option value="inside">Inside Dhaka — 60৳</option>
+                <option value="outside">Outside Dhaka — 120৳</option>
+            </select>
+        </div>
+
+        <div class="input-box">
+            <label>Payment Method</label>
+            <select id="paymentMethod" required>
+                <option value="cod">Cash on Delivery</option>
+                <option value="bkash">Bkash</option>
+                <option value="nagad">Nagad</option>
+                <option value="rocket">Rocket</option>
+            </select>
+        </div>
+
+        <div class="summary-area">
+            <h3>🧾 Order Summary</h3>
+
+            <div id="guestCartItems"></div>
+
+            <!-- ⭐ Divider Line -->
+            <div class="summary-divider"></div>
+
+            <div class="summary-row">
+                <span>Subtotal:</span>
+                <span id="guestSubtotal">৳0</span>
+            </div>
+
+            <div class="summary-row">
+                <span>Shipping:</span>
+                <span id="guestShipping">৳0</span>
+            </div>
+
+            <div class="summary-row total">
+    <span>Total:</span>
+    <span id="guestTotal">৳0</span>
+            </div>
+
+<div class="summary-row" style="margin-top: 6px; font-weight:600; color:#444;">
+    <span>Due:</span>
+    <span id="guestDue">৳0</span>
+</div>
+
+        </div>
+
+        <button type="submit" class="confirm-btn">Confirm Order</button>
+
+    </form>
+
+</div>
+
+
+<!-- SUCCESS POPUP -->
+<div id="successPopup" class="popup-overlay">
+  <div class="popup-box">
+    <div class="popup-icon">
+      ✓
+    </div>
+    <h2>Order Confirmed!</h2>
+    <p>Your order has been placed successfully.</p>
+    <button id="popupOkBtn">OK</button>
+  </div>
+</div>
+
+
+
+
+<script src="/Guest/guest-order.js"></script>
+
+</body>
+</html>

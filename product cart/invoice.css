@@ -1,0 +1,295 @@
+:root{
+  --bg:#f4f6fa;
+  --card:#ffffff;
+  --muted:#6b7280;
+  --accent:#1f2937;
+
+  /* 🔥 BRAND COLOR */
+  --primary:#ff523b;
+
+  --shadow:0 8px 20px rgba(10,15,30,0.06);
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  font-family:Inter, sans-serif;
+  background:var(--bg);
+  padding:24px;
+  color:#000000;
+}
+
+.container{
+  max-width:1000px;
+  margin:0 auto;
+}
+
+.card{
+  background:var(--card);
+  border-radius:14px;
+  padding:28px;
+  box-shadow:var(--shadow);
+}
+
+/* ================= HEADER ================= */
+
+header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:16px;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+
+.logo-img{
+  width:90px;
+  height:90px;
+  object-fit:contain;
+  border-radius:10px;
+  padding:6px;
+  border:2px solid rgba(255,82,59,0.3);
+  background:white;
+}
+
+.brand h1{
+  margin:0;
+  font-size:22px;
+  color:var(--primary);
+}
+
+.meta{
+  text-align:right;
+}
+
+.meta .title{
+  font-size:18px;
+  font-weight:700;
+  color:var(--primary);
+}
+
+.meta div{
+  font-size:14px;
+  color:#000000;
+}
+
+/* ================= INFO GRID ================= */
+
+.grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px;
+  margin-top:20px;
+}
+
+.box{
+  background:#fff5f3;
+  padding:14px;
+  border-radius:8px;
+  border-left:4px solid var(--primary);
+}
+
+.box h3{
+  margin-bottom:8px;
+  font-size:14px;
+  color:var(--primary);
+}
+
+.info{
+  font-size:14px;
+}
+
+/* ================= TABLE ================= */
+
+table{
+  width:100%;
+  margin-top:24px;
+  border-collapse:collapse;
+}
+
+thead th{
+  padding:12px;
+  background:rgba(255,82,59,0.12);
+  font-size:13px;
+  color:#000000;
+  border-bottom:1px solid rgba(255,82,59,0.3);
+}
+
+tbody td{
+  padding:12px;
+  border-bottom:1px solid #f1f5f9;
+  font-size:14px;
+}
+
+tbody tr:nth-child(even){
+  background:#fff8f6;
+}
+
+.center{
+  text-align:center;
+}
+
+.right{
+  text-align:right;
+}
+
+/* ================= TOTAL SECTION ================= */
+
+tfoot td{
+  padding:10px 12px;
+  font-size:14px;
+}
+
+.total-row{
+  background:rgba(255,82,59,0.15);
+  font-weight:700;
+  color:#000000;
+}
+
+/* ================= FOOTER ================= */
+
+.footer{
+  margin-top:25px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+}
+
+.muted{
+  color:#000000 ;
+}
+
+.small{
+  font-size:13px;
+}
+
+.actions{
+  display:flex;
+  gap:14px;
+  align-items:center;
+}
+
+.actions{
+  display:flex;
+  gap:16px;
+  align-items:center;
+}
+
+/* COMMON */
+.actions a,
+.actions button{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding:12px 24px;
+  border-radius:999px;
+  font-weight:700;
+  border:0;
+  cursor:pointer;
+  text-decoration:none;
+  overflow:hidden;
+  position:relative;
+  transition:all .35s ease;
+}
+
+.icon{
+  font-size:18px;
+  transition:transform .35s ease;
+}
+
+/* ================= HOME ================= */
+.home-btn{
+  background:linear-gradient(135deg,#111827,#374151);
+  color:#fff;
+  box-shadow:0 10px 25px rgba(0,0,0,.4);
+}
+
+.home-btn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 20px 40px rgba(0,0,0,.6);
+}
+
+.home-btn:hover .icon{
+  transform:translateX(-4px) rotate(-10deg);
+}
+
+/* ================= PRINT ================= */
+.print-btn{
+  background:linear-gradient(135deg,#ff523b,#ff7a5c);
+  color:#fff;
+  box-shadow:0 10px 25px rgba(255,82,59,.5);
+}
+
+.print-btn:hover{
+  transform:translateY(-2px) scale(1.03);
+  box-shadow:
+    0 0 0 5px rgba(255,82,59,.25),
+    0 22px 45px rgba(255,82,59,.7);
+}
+
+/* printer animation */
+.print-btn:hover .icon{
+  animation:printBounce .6s ease infinite alternate;
+}
+
+@keyframes printBounce{
+  from{transform:translateY(0);}
+  to{transform:translateY(-3px);}
+}
+
+/* click */
+.actions a:active,
+.actions button:active{
+  transform:scale(.96);
+}
+
+/* PRINT MODE */
+@media print{
+  .actions{display:none;}
+}
+
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:700px){
+  header{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+  .meta{
+    text-align:left;
+  }
+
+  .grid{
+    grid-template-columns:1fr;
+  }
+}
+
+/* ================= PRINT ================= */
+
+@media print{
+  body{
+    background:white;
+    padding:0;
+  }
+
+  .card{
+    box-shadow:none;
+    padding:0;
+  }
+}
+
+
+
+
+

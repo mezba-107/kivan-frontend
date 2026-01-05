@@ -1,0 +1,99 @@
+/* Page background */
+body {
+  background: #f7f8fc;
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+/* Center box */
+.forgot-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.forgot-box {
+  background: white;
+  padding: 35px;
+  border-radius: 14px;
+  width: 350px;
+  text-align: center;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.15);
+}
+
+.forgot-box h2 {
+  margin-bottom: 5px;
+  color: #ff523b;
+}
+
+.forgot-box p {
+  color: #555;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+/* Input */
+.forgot-box input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  margin-bottom: 15px;
+  font-size: 15px;
+}
+
+/* Button */
+#forgot-btn {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  background: #ff523b;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#forgot-btn:hover {
+  background: #e04834;
+}
+
+/* Back link */
+.back-login {
+  display: block;
+  margin-top: 15px;
+  font-size: 14px;
+  color: #444;
+  text-decoration: none;
+}
+
+.back-login:hover {
+  text-decoration: underline;
+}
+
+/* Dark Mode Support (optional, matches profile page) */
+.darkmode body {
+  background: #1A1B2C;
+}
+
+.darkmode .forgot-box {
+  background: #232439;
+  color: white;
+  box-shadow: none;
+}
+
+.darkmode input {
+  background: #1A1B2C;
+  border: 1px solid #444;
+  color: white;
+}
+
+.darkmode #forgot-btn {
+  background: #ff6a55;
+}
+
+.darkmode #forgot-btn:hover {
+  background: #ff866b;
+}

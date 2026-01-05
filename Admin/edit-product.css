@@ -1,0 +1,335 @@
+/* ================================
+  ✅ EDIT PRODUCT PAGE CSS
+================================ */
+
+/* page base */
+body {
+  background: linear-gradient(135deg, #050b1f, #020617);
+  font-family: Arial, Helvetica, sans-serif;
+  color: #fff;
+  margin: 0;
+  padding: 0;
+}
+
+/* title */
+h2 {
+  text-align: center;
+  margin-top: 120px;
+  margin-bottom: 30px;
+  color: #ff4d30;
+  font-size: 28px;
+}
+
+/* ================================
+  ✅ EDIT FORM
+================================ */
+.edit-form {
+  max-width: 500px;
+  margin: 0 auto;
+  background: #0b1229;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.6);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* inputs + textarea */
+.edit-form input,
+.edit-form textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  font-size: 15px;
+  background: #111936;
+  color: #fff;
+}
+
+/* textarea */
+.edit-form textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+/* placeholder color */
+.edit-form input::placeholder,
+.edit-form textarea::placeholder {
+  color: #9aa4c5;
+}
+
+/* focus */
+.edit-form input:focus,
+.edit-form textarea:focus {
+  outline: 2px solid #ff4d30;
+}
+
+/* submit button */
+.edit-form button {
+  background: linear-gradient(135deg, #ff4d30, #ff0022);
+  color: #fff;
+  font-size: 16px;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+/* button hover */
+.edit-form button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255, 77, 48, 0.5);
+}
+
+
+.edit-form input,
+.edit-form textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  font-size: 15px;
+  background: #111936;
+  color: #fff;
+  box-sizing: border-box; /* ✅ MUST */
+}
+
+
+
+
+
+#imagePreview {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-top: 10px;
+  background: #0b102a;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+
+
+
+
+
+/* ============================================
+   💎 PREMIUM FILE INPUT BUTTON (SUPER BEAUTIFUL)
+=============================================== */
+
+/* Default file input hide */
+input[type="file"] {
+  color: transparent;
+  width: 100%;
+}
+
+/* Remove default button */
+input[type="file"]::-webkit-file-upload-button {
+  visibility: hidden;
+}
+
+/* Custom Beautiful Button */
+input[type="file"]::before {
+  content: "📁 Select File";
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+
+  padding: 12px 0;
+
+  font-size: 15px;
+  font-weight: 600;
+
+  color: #ff4d4d;
+  background: rgba(255, 255, 255, 0.05);
+
+  border: 1px solid rgba(255, 77, 77, 0.3);
+  border-radius: 10px;
+
+  cursor: pointer;
+  transition: 0.3s;
+  backdrop-filter: blur(8px);
+
+  box-shadow: 0 0 20px rgba(255, 77, 77, 0.15);
+}
+
+/* Hover Effect */
+input[type="file"]:hover::before {
+  background: rgba(255, 77, 77, 0.1);
+  border-color: rgba(255, 77, 77, 0.6);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 25px rgba(255, 77, 77, 0.35);
+}
+
+/* Active Effect */
+input[type="file"]:active::before {
+  transform: scale(0.97);
+  background: rgba(255, 77, 77, 0.18);
+}
+
+
+
+
+
+/* ============================================
+   💎 PREMIUM FILE INPUT BUTTON (SUPER BEAUTIFUL)
+=============================================== */
+
+/* Default file input hide */
+input[type="file"] {
+  color: transparent;
+  width: 100%;
+}
+
+/* Remove default button */
+input[type="file"]::-webkit-file-upload-button {
+  visibility: hidden;
+}
+
+/* Custom Beautiful Button */
+input[type="file"]::before {
+  content: "📁 Select File";
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+
+  padding: 12px 0;
+
+  font-size: 15px;
+  font-weight: 600;
+
+  color: #ff4d4d;
+  background: rgba(255, 255, 255, 0.05);
+
+  border: 1px solid rgba(255, 77, 77, 0.3);
+  border-radius: 10px;
+
+  cursor: pointer;
+  transition: 0.3s;
+  backdrop-filter: blur(8px);
+
+  box-shadow: 0 0 20px rgba(255, 77, 77, 0.15);
+}
+
+/* Hover Effect */
+input[type="file"]:hover::before {
+  background: rgba(255, 77, 77, 0.1);
+  border-color: rgba(255, 77, 77, 0.6);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 25px rgba(255, 77, 77, 0.35);
+}
+
+/* Active Effect */
+input[type="file"]:active::before {
+  transform: scale(0.97);
+  background: rgba(255, 77, 77, 0.18);
+}
+
+
+
+/* ===============================
+   🌌 THEMED PREMIUM POPUP
+================================ */
+
+.popup-overlay {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at top, rgba(0,0,0,0.4), rgba(0,0,0,0.85));
+  backdrop-filter: blur(4px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+}
+
+/* 🔮 Glass Card */
+.popup-box.glass {
+  width: 340px;
+  padding: 28px;
+  border-radius: 18px;
+  text-align: center;
+  background: linear-gradient(
+    145deg,
+    rgba(30,41,59,0.9),
+    rgba(15,23,42,0.95)
+  );
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow:
+    0 20px 60px rgba(0,0,0,0.8),
+    inset 0 0 20px rgba(255,255,255,0.03);
+  animation: popupIn 0.45s cubic-bezier(.4,0,.2,1);
+}
+
+/* ✅ ICON */
+.popup-icon {
+  width: 70px;
+  height: 70px;
+  margin: 0 auto 12px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 36px;
+  font-weight: bold;
+}
+
+.popup-icon.success {
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  box-shadow: 0 0 25px rgba(34,197,94,0.6);
+  color: #041b0d;
+}
+
+.popup-icon.error {
+  background: linear-gradient(135deg, #ef4444, #b91c1c);
+  box-shadow: 0 0 25px rgba(239,68,68,0.6);
+  color: #fff;
+}
+
+/* 📝 TEXT */
+.popup-box h3 {
+  margin-top: 10px;
+  color: #f8fafc;
+  font-size: 22px;
+  letter-spacing: 0.3px;
+}
+
+.popup-box p {
+  margin-top: 6px;
+  font-size: 14px;
+  color: #cbd5e1;
+}
+
+/* 🔘 BUTTON */
+.popup-btn {
+  margin-top: 22px;
+  padding: 10px 26px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  color: #041b0d;
+  transition: all 0.25s ease;
+}
+
+.popup-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 25px rgba(34,197,94,0.45);
+}
+
+/* ✨ Animation */
+@keyframes popupIn {
+  0% {
+    transform: scale(0.7) translateY(20px);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}

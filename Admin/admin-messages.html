@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Admin Messages</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/Admin/admin-nav.css">
+  <link rel="stylesheet" href="/Admin/admin-messages.css">
+</head>
+<body>
+
+  <!-- Admin Navbar -->
+  <div id="admin-navbar"></div>
+
+  <h2>📩 Customer Messages</h2>
+
+  <div class="messages-wrapper">
+
+    <!-- Single Message Card -->
+    <div class="message-card unread">
+      <div class="msg-header">
+        <h4>John Doe</h4>
+        <span class="msg-date">02 Jan 2026</span>
+      </div>
+
+      <!-- EMAIL -->
+      <p class="msg-email">📧 john@email.com</p>
+
+      <!-- MOBILE NUMBER -->
+      <p class="msg-phone">📞 01842385257</p>
+
+      <!-- MESSAGE -->
+      <p class="msg-text">
+        Hi, I want to know about delivery time for sneakers.
+      </p>
+
+      <div class="msg-actions">
+        <button class="btn-read">Mark Read</button>
+        <button class="btn-delete">Delete</button>
+      </div>
+    </div>
+
+    <!-- Another -->
+    <div class="message-card">
+      <div class="msg-header">
+        <h4>Alex</h4>
+        <span class="msg-date">01 Jan 2026</span>
+      </div>
+
+      <p class="msg-email">📧 alex@email.com</p>
+      <p class="msg-phone">📞 01700000000</p>
+
+      <p class="msg-text">
+        Do you ship outside Dhaka?
+      </p>
+
+      <div class="msg-actions">
+        <button class="btn-read">Read</button>
+        <button class="btn-delete" data-id="MESSAGE_ID">Delete</button>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <!-- 🗑️ Delete Confirm Modal -->
+<div id="deleteModal" class="modal hidden">
+  <div class="modal-box">
+    <h3>Delete Message?</h3>
+    <p>Are you sure you want to delete this message?</p>
+
+    <div class="modal-actions">
+      <button id="cancelDelete" class="btn-cancel">Cancel</button>
+      <button id="confirmDelete" class="btn-confirm">Delete</button>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  <!-- JS -->
+  <script src="/Admin/admin-nav.js"></script>
+  <script src="/Admin/admin-messages.js"></script>
+
+</body>
+</html>

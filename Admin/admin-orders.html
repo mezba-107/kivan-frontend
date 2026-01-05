@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Admin Orders</title>
+<link rel="stylesheet" href="/Admin/admin-orders.css" />
+</head>
+
+
+
+<body>
+
+        <div id="admin-navbar"></div>
+
+<h2>📦 All Orders (Admin)</h2>
+
+<!-- ✅ Orders show হবে এখানে -->
+<div id="ordersContainer"></div>
+
+<!-- ✅ JS -->
+<script src="./Admin-orders.js"></script>
+
+
+
+
+<!-- admin common -->
+
+<link rel="stylesheet" href="/Admin/admin-nav.css">
+<script src="/Admin/admin-nav.js"></script>
+
+
+
+
+<!-- ✅ Custom Confirm Popup -->
+
+<div id="confirmOverlay" class="confirm-overlay">
+  <div class="confirm-box">
+    <h3>Cancel Order?</h3>
+    <p>Are you sure you want to cancel this order?</p>
+
+    <div class="confirm-actions">
+      <button id="confirmNo" class="btn">No</button>
+      <button id="confirmYes" class="btn danger">Yes, Cancel</button>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- ===============================
+    ✅ CANCEL REQUEST POPUP (ADMIN)
+================================ -->
+<div id="cancelReqOverlay" class="confirm-overlay">
+  <div class="confirm-box">
+    <h3>Cancel Request</h3>
+
+    <p id="cancelReqReason" style="margin-bottom:18px;"></p>
+
+    <div class="confirm-actions">
+      <button id="reqBack" class="btn">Back</button>
+      <button id="reqDecline" class="btn">Decline</button>
+      <button id="reqApprove" class="btn danger">Approve</button>
+    </div>
+  </div>
+</div>
+
+
+
+</body>
+</html>

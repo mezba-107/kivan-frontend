@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Single Product </title>
+    <link rel="stylesheet" href="cart.css">
+    <link href="https://fonts.googleapis.com/css2?family=Ancizar+Sans:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+</head>
+<body class="darkmode">
+ <div class="container">
+    <div class="navbar">
+        <div class="logo">
+            <a href="/index.html"><img src="/images/logo-kivan-light.png" id="logo" alt="KI-VAN logo" width="67px"></a>
+        </div>
+        <nav>
+            <ul id="MenuItems">
+                <li><a href="/index.html">Home</a></li>
+                <li><a href="/product/products.html">products</a></li>
+                <li><a href="/About/about.html">About</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a href="/Account/account.html">Account</a></li>
+            </ul>
+        </nav>
+                
+        <a href="/product cart/cart.html" class="cart-wrapper">
+            <img src="/images/cart.png" id="cart-icon" width="30"  height="30px">
+            <span id="cart-count">0</span>
+        </a>
+
+        <img src="/images/menu.png" class="menu-icon" onclick="menutoggle()">
+         <button id="theme-switch">
+            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000"><path d="M480-120q-150 0-255-105T120-480q0-150 105-255t255-105q14 0 27.5 1t26.5 3q-41 29-65.5 75.5T444-660q0 90 63 153t153 63q55 0 101-24.5t75-65.5q2 13 3 26.5t1 27.5q0 150-105 255T480-120Z"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000"><path d="M480-280q-83 0-141.5-58.5T280-480q0-83 58.5-141.5T480-680q83 0 141.5 58.5T680-480q0 83-58.5 141.5T480-280ZM200-440H40v-80h160v80Zm720 0H760v-80h160v80ZM440-760v-160h80v160h-80Zm0 720v-160h80v160h-80ZM256-650l-101-97 57-59 96 100-52 56Zm492 496-97-101 53-55 101 97-57 59Zm-98-550 97-101 59 57-100 96-56-52ZM154-212l101-97 55 53-97 101-59-57Z"/></svg>
+        </button>
+    </div>
+ </div>
+
+<!-- cart items  -->
+
+<div class="small-container cart-page">
+
+    <table>
+        <tr>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Subtotal</th>
+        </tr>
+        <tr>
+            <td>
+                <div class="cart-info">
+                   <a href="/product details/product 1/sneakers 10/sneakers 10.html"> <img src="/product details/product 1/sneakers 10/sneakers 10.jpeg"></a>
+                    <div>
+                        <p>Nike Dunk QS SB x Travis Scott Cactus Jack</p>
+                        <small> Price :$2999.00</small>
+                        <br>
+                        <a href="">Remove</a>
+                    </div>
+                </div>
+            </td>
+            <td><input type="number" value="1"></td>
+            <td>$2999.00</td>
+        </tr>
+         <tr>
+            <td>
+                <div class="cart-info">
+                   <a href="/product details/product 2/pant 1/pant 1.html"> <img src="/product details/product 2/pant 1/pant 1.webp"></a>
+                    <div>
+                        <p>Jigga Wear Stripe Zip Cargo</p>
+                        <small> Price :$35.00</small>
+                        <br>
+                        <a href="">Remove</a>
+                    </div>
+                </div>
+            </td>
+            <td><input type="number" value="1"></td>
+            <td>$35.00</td>
+        </tr>
+         <tr>
+            <td>
+                <div class="cart-info">
+                  <a href="/product details/product 3/Tshirt 14/Tshirt 14.html"> <img src="/product details/product 3/Tshirt 14/Tshirt 14.webp"></a>
+                    <div>
+                        <p>Printed T-Shirt</p>
+                        <small> Price :$42.50</small>
+                        <br>
+                        <a href="">Remove</a>
+                    </div>
+                </div>
+            </td>
+            <td><input type="number" value="1"></td>
+            <td>$42.50</td>
+        </tr>
+    </table> 
+
+    <div class="total-price">
+        <table>
+            <tr>
+                <td>Subtotal</td>
+                <td>$3076.50</td>
+            </tr>
+            <tr>
+                <td>Tax</td>
+                <td>$50.00</td>
+            </tr>
+            <tr>
+                <td>Total</td>
+                <td>$3126.50</td>
+            </tr>
+        </table>
+    </div>
+
+</div>
+
+
+
+
+
+
+<!-- confirm button for order  -->
+
+
+
+<div class="order-action">
+<button id="confirmOrderBtn">Confirm Order</button>
+</div>
+
+
+
+<div class="cart-actions">
+    <a href="/product cart/my-orders.html" class="orders-btn">
+        📦 View My Orders
+    </a>
+</div>
+
+
+
+<!-- confirm remove order popup -->
+<div id="remove-modal" class="modal">
+    <div class="modal-box">
+    <div class="modal-icon">⚠️</div>
+    <h3>Remove item?</h3>
+    <p>Are you sure you want to remove this item from your cart?</p>
+
+    <div class="modal-actions">
+        <button id="cancel-remove" class="btn-cancel">Cancel</button>
+        <button id="confirm-remove" class="btn-danger">Remove</button>
+    </div>
+    </div>
+</div>
+
+
+
+<!-- ✅ SUCCESS POPUP -->
+<div id="success-modal" class="modal">
+    <div class="modal-box success">
+    <h3>✅ Order Placed!</h3>
+    <p>Your order was placed successfully.</p>
+    <button id="success-ok">OK</button>
+    </div>
+</div>
+
+<!-- ❌ ORDER FAILED POPUP -->
+<div id="error-modal" class="modal">
+<div class="modal-box error">
+    <h3>❌ Order Failed!</h3>
+    <p id="error-message">Something went wrong.</p>
+    <button id="error-ok">OK</button>
+</div>
+</div>
+
+
+
+
+<!-- popup html  -->
+
+
+
+<div id="order-confirm-popup" class="popup-container">
+<div class="popup-box">
+
+    <h2>Confirm Your Order</h2>
+
+    <!-- PRODUCT SLIDER -->
+<div class="popup-slider">
+    <button id="prevProduct" class="slider-btn">❮</button>
+
+    <div class="popup-slider-content">
+        
+        <img id="popup-product-img" class="popup-img" alt="Product">
+
+        <p id="popup-product-title" class="popup-title"></p>
+
+    <!-- NEW: PRICE -->
+
+        <p id="popup-product-price" class="popup-info"></p>
+
+            <!-- NEW: SIZE -->
+    <p id="popup-product-size" class="popup-info"></p>
+
+    <!-- NEW: QUANTITY -->
+    <p id="popup-product-qty" class="popup-info"></p>
+
+        <!-- ✅ EXACT CORRECT PLACE -->
+        <button id="removeProductBtn" class="remove-btn">Remove Product</button>
+
+    </div>
+
+    <button id="nextProduct" class="slider-btn">❯</button>
+</div>
+
+    <p><strong>Your Name:</strong> <span id="popup-user-name"></span></p>
+    <p><strong>Mobile:</strong> <span id="popup-user-phone"></span></p>
+    <p><strong>City:</strong> <span id="popup-user-city"></span></p>
+    <p><strong>Your Address:</strong> <span id="popup-user-address"></span></p>
+
+    <div id="popup-guest-fields" style="display:none; margin-top:15px;">
+  <input type="text" id="guestName" placeholder="Your Name" class="guest-input">
+  <input type="text" id="guestPhone" placeholder="Mobile Number" class="guest-input">
+  <input type="text" id="guestAddress" placeholder="Your Address" class="guest-input">
+</div>
+
+
+    <div class="popup-btn-row">
+    <button id="nextStepBtn" class="next-btn">Next</button>
+    <button id="cancelPopupBtn" class="cancel-btn">Cancel</button>
+    </div>
+
+</div>
+</div>
+
+
+<!-- STEP–2 POPUP -->
+<div class="popup" id="step2Popup" style="display: none;">
+    <div class="popup-content">
+
+        <h2>Final Invoice</h2>
+
+        <div class="invoice-box">
+
+            <!-- MULTI PRODUCT LIST -->
+            <div id="invoiceList"></div>
+
+            <p><strong>Subtotal:</strong> <span id="invSubtotal">0</span> ৳</p>
+            <p><strong>Delivery Charge:</strong> <span id="invDelivery">60</span> ৳</p>
+            <p><strong>Total:</strong> <span id="invTotal">0</span> ৳</p>
+
+            <hr>
+
+            <p><strong>Name:</strong> <span id="invUser"></span></p>
+            <p><strong>Mobile:</strong> <span id="invMobile"></span></p>
+            <p><strong>City:</strong> <span id="invCity"></span></p>
+            <p><strong>Address:</strong> <span id="invAddress"></span></p>
+
+            <hr>
+
+            <label><strong>Select Payment Method</strong></label>
+
+            <select id="invPayment">
+                <option value="">-- Select Payment Method --</option>  
+                <option value="Cash on Delivery">Cash on Delivery</option>
+                <option value="Bkash">Bkash</option>
+                <option value="Nagad">Nagad</option>
+                <option value="Rocket">Rocket</option>
+            </select>
+
+            <!-- 🔥 Inline Error Text -->
+            <p id="paymentError" style="color: red; font-size: 14px; margin-top: 5px; display: none;">
+                Please select a payment method.
+            </p>
+
+        </div>
+
+        <button id="finalConfirmBtn">Place Order</button>
+        <button id="backToStep1">Back</button>
+
+    </div>
+</div>
+
+
+
+
+<!-- ORDER CONFIRMED POPUP -->
+<div id="orderSuccessPopup" class="order-success-popup" style="display:none;">
+    <div class="popup-content">
+        <div class="icon">✔</div>
+        <h2>Order Confirmed!</h2>
+        <p>Your order has been placed successfully.</p>
+
+        <!-- BUTTONS -->
+        <button id="viewInvoiceBtn" class="popup-btn">View Invoice</button>
+        <button id="downloadInvoiceBtn" class="popup-btn download">Download Invoice</button>
+
+        <button id="closeSuccessPopup" class="close-btn">Close</button>
+    </div>
+</div>
+
+
+
+
+
+
+
+<!-- LOGIN OR GUEST POPUP -->
+
+<div id="loginGuestPopup" class="lg-popup">
+  <div class="lg-box">
+
+    <h2>Continue</h2>
+    <p>You are not logged in. Choose an option:</p>
+
+    <div class="lg-btns">
+      <button id="lgLoginBtn" class="lg-login">Login Now</button>
+      <button id="lgGuestBtn" class="lg-guest">Order as Guest</button>
+    </div>
+
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--footer -->
+
+<div class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="footer-col-1">
+                <h3>Download Our App</h3>
+                <p>Dpwnload App for Android and ios mobile phone.</p>
+                <div class="app-logo">
+                    <img src="/images/play-store.png">
+                    <img src="/images/app-store.png">
+                </div>
+            </div>
+            <div class="footer-col-2">
+            <a href="/index.html"> <img src="/images/logo-kivan w.png"> </a>
+                <p>Our Purpose Id To Sustainable Make the pleasure and Benefits of Sports Accessible to the Many</p>
+            </div>
+            <div class="footer-col-3">
+                <h3>Useful Links </h3>
+                <ul>
+                    <li>Coupons</li>
+                    <li>Blog Post</li>
+                    <li>Return Policy</li>
+                    <li>join Affiliate</li>
+                </ul>
+            </div>
+            <div class="footer-col-4">
+                <h3> Follow Us </h3>
+                <ul>
+                    <li><i class="fa-brands fa-facebook"> </i> Facebook</li>
+                    <li><i class="fa-brands fa-twitter"></i> Twitter</li>
+                    <li><i class="fa-brands fa-instagram"></i> Instagram</li>
+                    <li><i class="fa-brands fa-whatsapp"></i> Whatsapp</li>
+                </ul>
+            </div>
+        </div>
+        <hr>
+        <p class="copy-right"> <i class="fa-regular fa-copyright"></i></i>  Copy Right  2024 - SIMON </p>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- js for toggle menu  -->
+
+<script>
+    var MenuItems = document.getElementById("MenuItems");
+
+    MenuItems.style.maxHeight = "0px"
+
+    function menutoggle(){
+        if(MenuItems.style.maxHeight == "0px")
+    {
+        MenuItems.style.maxHeight = "200px";
+    }
+    else{
+        MenuItems.style.maxHeight = "0px";
+    }
+    }
+</script>
+
+
+<script type="text/javascript" src="/darkmode.js" defer></script>
+
+<script src="/username.js"></script>
+
+<script src="/product cart/cart.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+
+
+</body>
+</html>

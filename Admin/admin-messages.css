@@ -1,0 +1,220 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", sans-serif;
+  background: #0b1020;
+  color: #eee;
+}
+
+h2 {
+  text-align: center;
+  margin: 40px 0 30px;
+  color: #ff523b;
+}
+
+/* Wrapper */
+.messages-wrapper {
+  width: 900px;
+  max-width: 95%;
+  margin: auto;
+
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Message Card */
+.message-card {
+  background: #0b1020;
+  border: 1px solid #2a2f55;
+  border-radius: 16px;
+  padding: 20px;
+
+  box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+  transition: 0.25s ease;
+}
+
+.message-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 45px rgba(0,0,0,0.75);
+}
+
+/* Unread Glow */
+.message-card.unread {
+  border-color: #ff523b;
+  box-shadow: 0 0 18px rgba(255,82,59,0.35);
+}
+
+/* Header */
+.msg-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.msg-header h4 {
+  color: #fff;
+  font-size: 16px;
+}
+
+.msg-date {
+  font-size: 12px;
+  color: #aaa;
+}
+
+/* Email */
+.msg-email {
+  font-size: 13px;
+  color: #9aa4ff;
+  margin-bottom: 10px;
+}
+
+/* Text */
+.msg-text {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #ddd;
+}
+
+/* Actions */
+.msg-actions {
+  margin-top: 14px;
+  display: flex;
+  gap: 12px;
+}
+
+.msg-actions button {
+  padding: 8px 16px;
+  border-radius: 10px;
+  border: none;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+/* Read */
+.btn-read {
+  background: linear-gradient(135deg, #1f244a, #14182e);
+  color: #fff;
+}
+
+.btn-read:hover {
+  background: linear-gradient(135deg, #ff523b, #e63b25);
+  box-shadow: 0 8px 20px rgba(255,82,59,0.45);
+}
+
+/* Delete */
+.btn-delete {
+  background: transparent;
+  color: #ff6b6b;
+  border: 1px solid #ff6b6b;
+}
+
+.btn-delete:hover {
+  background: #ff6b6b;
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(255,107,107,0.45);
+}
+
+.msg-phone {
+  font-size: 13px;
+  color: #9aa4ff;
+  margin-bottom: 8px;
+}
+
+
+
+/* =====================
+   Delete Modal
+===================== */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+
+.modal.hidden {
+  display: none;
+}
+
+.modal-box {
+  background: #0b1228;
+  border: 1px solid #ff523b;
+  border-radius: 14px;
+  padding: 24px 28px;
+  width: 340px;
+  text-align: center;
+  box-shadow: 0 0 30px rgba(255,82,59,.4);
+  animation: pop 0.25s ease-out;
+}
+
+.modal-box h3 {
+  color: #ff523b;
+  margin-bottom: 10px;
+}
+
+.modal-box p {
+  color: #cbd5ff;
+  font-size: 14px;
+}
+
+.modal-actions {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+}
+
+.btn-cancel {
+  background: transparent;
+  border: 1px solid #555;
+  color: #cbd5ff;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.btn-confirm {
+  background: linear-gradient(135deg, #ff4d2d, #ff784d);
+  border: none;
+  color: white;
+  padding: 8px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+@keyframes pop {
+  from { transform: scale(.9); opacity: 0 }
+  to { transform: scale(1); opacity: 1 }
+}
+
+
+
+.message-card.unread {
+  border: 1px solid #ff5c5c;
+  box-shadow: 0 0 14px rgba(255,92,92,.35);
+}
+
+.btn-read {
+  background: #2ecc71;
+  color: #000;
+  padding: 5px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.read-label {
+  color: #7dff9c;
+  font-size: 13px;
+  font-weight: 600;
+}

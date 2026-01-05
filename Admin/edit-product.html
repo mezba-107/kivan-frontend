@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Edit Product</title>
+
+  <!-- =========================
+       ✅ PAGE STYLES
+  ========================== -->
+  <link rel="stylesheet" href="/Admin/edit-product.css" />
+  <link rel="stylesheet" href="/Admin/admin-nav.css" />
+</head>
+<body>
+
+  <!-- =========================
+       ✅ ADMIN NAVBAR (AUTO LOAD)
+       admin-nav.js এখানে navbar inject করবে
+  ========================== -->
+  <div id="admin-navbar"></div>
+
+  <!-- =========================
+       ✅ PAGE TITLE
+  ========================== -->
+  <h2>✏️ Edit Product</h2>
+
+  <!-- =========================
+       ✅ EDIT PRODUCT FORM
+       JS থেকে এই form ধরেই কাজ হবে
+  ========================== -->
+  <form id="editProductForm" class="edit-form">
+
+    <!-- ✅ PRODUCT NAME -->
+    <!-- পুরানো product name এখানে auto বসবে -->
+    <input
+      type="text"
+      id="name"
+      placeholder="Product Name"
+      required
+    />
+
+    <!-- ✅ PRODUCT PRICE -->
+    <!-- number type, তাই invalid value যাবে না -->
+    <input
+      type="number"
+      id="price"
+      placeholder="Price"
+      required
+    />
+
+    <!-- ✅ PRODUCT DESCRIPTION -->
+    <!-- optional field -->
+    <textarea
+      id="description"
+      placeholder="Description"
+    ></textarea>
+
+    <!-- ✅ PRODUCT IMAGE UPLOAD -->
+    <!-- 
+      ✔ এখানে নতুন image select করলে preview দেখাবে
+      ✔ select না করলে আগের image থাকবে
+    -->
+    <label>Product Image</label>
+    <input
+      type="file"
+      id="image"
+      accept="image/*"
+    />
+
+    <!-- ✅ IMAGE PREVIEW -->
+    <!-- 
+      ✔ Edit page খুললেই পুরানো image দেখাবে
+      ✔ নতুন image নিলে auto replace হবে
+    -->
+    <img
+      id="imagePreview"
+      alt="Image Preview"
+      style="
+        display:none;
+        width:160px;
+        height:160px;
+        object-fit:cover;
+        border-radius:8px;
+        margin-top:10px;
+      "
+    />
+
+    <!-- ✅ PRODUCT GALLERY -->
+<label>Product Gallery (Multiple Images)</label>
+<input
+  type="file"
+  id="gallery"
+  accept="image/*"
+  multiple
+/>
+
+<!-- ✅ GALLERY PREVIEW -->
+<div id="galleryPreview" style="display:flex; gap:10px; flex-wrap:wrap;"></div>
+
+
+    <!-- ✅ SUBMIT BUTTON -->
+    <!-- click করলে edit-product.js trigger হবে -->
+    <button type="submit">
+      ✅ Update Product
+    </button>
+
+  </form>
+
+
+
+      <!-- ✅ CUSTOM POPUP -->
+
+<div id="popupOverlay" class="popup-overlay">
+  <div class="popup-box glass">
+    <div id="popupIcon" class="popup-icon success">
+      ✓
+    </div>
+
+    <h3 id="popupTitle">Success</h3>
+    <p id="popupMessage">Product Updated Successfully</p>
+
+    <button class="popup-btn" onclick="closePopup()">OK</button>
+  </div>
+</div>
+
+
+
+
+
+  <!-- =========================
+      ✅ PAGE SCRIPTS
+  ========================== -->
+
+  <!-- Admin Navbar loader -->
+  <script src="/Admin/admin-nav.js"></script>
+
+  <!-- Product edit logic (load, preview, update) -->
+  <script src="/Admin/edit-product.js"></script>
+
+</body>
+</html>
