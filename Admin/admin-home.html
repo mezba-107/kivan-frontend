@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Admin Dashboard</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/Admin/admin-nav.css">
+  <link rel="stylesheet" href="/Admin/admin-home.css">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <div id="admin-navbar"></div>
+
+  <!-- =========================
+       DASHBOARD
+  ========================== -->
+  <div class="dashboard">
+
+    <h2>📊 Admin Dashboard</h2>
+
+    <div class="cards">
+
+      <div class="card">
+        <span class="icon">📦</span>
+        <h3>Total Orders</h3>
+        <p id="totalOrders">0</p>
+      </div>
+
+      <div class="card pending">
+        <span class="icon">⏳</span>
+        <h3>Pending</h3>
+        <p id="pendingOrders">0</p>
+      </div>
+
+      <div class="card confirm">
+        <span class="icon">✅</span>
+        <h3>Confirmed</h3>
+        <p id="confirmedOrders">0</p>
+      </div>
+
+      <div class="card shipped">
+        <span class="icon">🚛</span>
+        <h3>Shipped</h3>
+        <p id="shippedOrders">0</p>
+      </div>
+
+      <div class="card out-for-delivery">
+  <span class="icon">🚚💨</span>
+  <h3>Out for Delivery</h3>
+  <p id="outForDeliveryOrders">0</p>
+</div>
+
+      <div class="card delivered">
+        <span class="icon">📬</span>
+        <h3>Delivered</h3>
+        <p id="deliveredOrders">0</p>
+      </div>
+
+      <div class="card refunded">
+  <span class="icon">🔄</span>
+  <h3>Returned</h3>
+  <p id="returnedOrders">0</p>
+</div>
+
+      <div class="card cancelled">
+        <span class="icon">❌</span>
+        <h3>Cancelled</h3>
+        <p id="cancelledOrders">0</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- JS -->
+  <script src="/Admin/admin-nav.js"></script>
+  <script src="/Admin/admin-home.js"></script>
+
+</body>
+</html>

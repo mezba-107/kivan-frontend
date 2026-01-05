@@ -687,3 +687,119 @@ ul{
 .darkmode .col-4 p {
   color: #ff523b;
 }
+
+
+
+/* ===============================
+   🌟 TESTIMONIAL SECTION REFINED V2
+================================ */
+
+.testimonial {
+    padding: 100px 20px;
+    background: #fff; /* soft light gray background */
+    transition: background 0.5s ease-in-out;
+}
+
+.testimonial .small-container {
+    max-width: 1080px;
+    margin: auto;
+}
+
+.testimonial .row {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.testimonial .col-3 {
+    flex: 1 1 30%;
+    min-width: 250px;
+    background: #fff;
+    border-radius: 18px;
+    padding: 35px 25px 45px 25px;
+    text-align: center;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.06);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    cursor: pointer;
+    position: relative;
+}
+
+.testimonial .col-3:hover {
+    transform: translateY(-12px);
+    box-shadow: 0 25px 60px rgba(0,0,0,0.2);
+}
+
+.testimonial .col-3 img {
+    width: 75px;
+    height: 75px;
+    object-fit: cover;
+    margin: 20px auto 12px auto;
+    border-radius: 50%;
+    border: 3px solid var(--accent-colour);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.testimonial .col-3 img:hover {
+    transform: scale(1.1);
+    border-color: #ff523b;
+    box-shadow: 0 6px 18px rgba(255,82,59,0.3);
+}
+
+.testimonial .col-3 p {
+    font-size: 15px;
+    color: var(--secondary-text);
+    line-height: 1.7;
+    margin: 18px 0 22px 0;
+    font-style: italic;
+}
+
+.testimonial .col-3 h3 {
+    font-size: 19px;
+    font-weight: 700;
+    color: var(--primary-colour);
+    margin-top: 12px;
+}
+
+.testimonial .rating {
+    margin-bottom: 12px;
+}
+
+.testimonial .rating .fa-star {
+    color: #ff523b;
+    margin: 0 3px;
+    font-size: 15px;
+}
+
+.fa-quote-left {
+    color: #ff523b;
+    font-size: 32px;
+    margin-bottom: 12px;
+}
+
+/* DARK MODE */
+.darkmode .testimonial {
+    background: #070b1d; /* softer dark background */
+}
+
+.darkmode .testimonial .col-3 {
+    background: rgba(16, 20, 37, 0.95);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+}
+
+.darkmode .testimonial .col-3 h3 {
+    color: #ffffff;
+}
+
+.darkmode .testimonial .col-3 p {
+    color: #ccc;
+}
+
+/* DARK MODE HOVER WHITE SHADOW */
+.darkmode .testimonial .col-3:hover {
+    transform: translateY(-12px);
+    box-shadow:
+        0 25px 60px rgba(255, 255, 255, 0.15),
+        0 0 25px rgba(255, 255, 255, 0.08);
+}

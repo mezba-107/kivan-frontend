@@ -1,0 +1,64 @@
+body {
+  margin: 0;
+  font-family: "Segoe UI", sans-serif;
+  background: #0b1020;
+  color: #eee;
+}
+
+/* Dashboard */
+.dashboard {
+  padding: 40px;
+}
+
+.dashboard h2 {
+  text-align: center;
+  margin-bottom: 40px;
+  color: #ff523b;
+}
+
+/* Cards Grid */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 24px;
+}
+
+/* Card */
+.card {
+  background: #0b1020;
+  border: 1px solid #2a2f55;
+  border-radius: 16px;
+  padding: 26px;
+  text-align: center;
+
+  box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 25px 55px rgba(255,82,59,0.25);
+}
+
+.card .icon {
+  font-size: 32px;
+}
+
+.card h3 {
+  margin: 14px 0 10px;
+  font-size: 16px;
+  color: #cbd5ff;
+}
+
+.card p {
+  font-size: 34px;
+  font-weight: bold;
+  color: #fff;
+}
+
+/* Status Colors */
+.pending p { color: #ff9800; }
+.confirm p { color: #4caf50; }
+.shipped p { color: #03a9f4; }
+.delivered p { color: #00e676; }
+.cancelled p { color: #f44336; }

@@ -9,6 +9,9 @@ fetch("/Admin/admin-nav.html")
     // ==============================
     loadMessageCount();
 
+    // ✅📦 LOAD ORDER COUNT (ADD THIS)
+    loadOrderCount(); // 🔥 এই লাইনটাই missing ছিল
+
     // ✅ ACTIVE + ANIMATION
     const links = navDiv.querySelectorAll(".nav-links a");
     const currentPage = window.location.pathname.split("/").pop();
@@ -43,7 +46,7 @@ async function loadMessageCount() {
     const token = localStorage.getItem("token");
     if (!token) return;
 
-    const res = await fetch("https://kivan-backend.onrender.com/api/messages/count", {
+    const res = await fetch("http://localhost:5000/api/messages/count", {
       headers: {
         Authorization: `Bearer ${token}`
       }
@@ -58,5 +61,44 @@ async function loadMessageCount() {
 
   } catch (err) {
     console.error("Failed to load message count", err);
+  }
+}
+
+
+
+// ==============================
+// 📦 ORDER COUNT FUNCTION
+// ==============================
+async function loadOrderCount() {
+  try {
+    const token = localStorage.getItem("token");
+    if (!token) return;
+
+    const res = await fetch(
+      "http://localhost:5000/api/orders/admin/pending-count",
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
+    );
+
+    const data = await res.json();
+    console.log("ORDER COUNT:", data); // debug
+
+    const badge = document.getElementById("order-count");
+    if (!badge) return;
+
+    badge.innerText = data.count || 0;
+
+    if (data.count > 0) {
+      badge.style.display = "flex";
+      badge.classList.add("pulse");
+    } else {
+      badge.style.display = "none";
+    }
+
+  } catch (err) {
+    console.error("Order count error", err);
   }
 }
