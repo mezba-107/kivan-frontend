@@ -8,6 +8,7 @@ body {
 /* Dashboard */
 .dashboard {
   padding: 40px;
+  margin-bottom: 25px;
 }
 
 .dashboard h2 {
@@ -60,5 +61,161 @@ body {
 .pending p { color: #ff9800; }
 .confirm p { color: #4caf50; }
 .shipped p { color: #03a9f4; }
+.out-for-delivery p { color: #baff39; }
 .delivered p { color: #00e676; }
+.returned p { color: #9aaeff; }
 .cancelled p { color: #f44336; }
+
+
+/* =========================
+   DASHBOARD CARD HOVER COLORS
+========================= */
+.card.total-orders {
+  color: #ffffff;   /* or #cbd5ff */
+}
+.card.total-orders:hover {
+  border-color: #ffffff;
+  box-shadow: 0 0 24px rgba(255, 255, 255, 0.45);
+}
+.card:hover .icon,
+.card:hover p {
+  color: currentColor;
+  filter: drop-shadow(0 0 8px currentColor);
+  transform: scale(1.12);
+}
+
+/* Pending */
+.card.pending:hover {
+  border-color: rgba(240, 186, 25, 0.6);
+  box-shadow: 0 0 22px rgba(240, 186, 25, 0.45);
+}
+
+/* Confirmed */
+.card.confirm:hover {
+  border-color: rgba(7, 218, 233, 0.6);
+  box-shadow: 0 0 24px rgba(7, 218, 233, 0.5);
+}
+
+/* Shipped */
+.card.shipped:hover {
+  border-color: rgba(63, 255, 220, 0.6);
+  box-shadow: 0 0 24px rgba(63, 255, 220, 0.45);
+}
+
+/* Out for Delivery */
+.card.out-for-delivery:hover {
+  border-color: rgba(186, 255, 57, 0.6);
+  box-shadow: 0 0 26px rgba(186, 255, 57, 0.5);
+}
+
+/* Delivered */
+.card.delivered:hover {
+  border-color: rgba(2, 255, 57, 0.6);
+  box-shadow: 0 0 26px rgba(2, 255, 57, 0.55);
+}
+
+/* Cancelled */
+.card.cancelled:hover {
+  border-color: rgba(236, 4, 28, 0.6);
+  box-shadow: 0 0 24px rgba(236, 4, 28, 0.5);
+}
+
+/* Returned */
+.card.refunded:hover {
+  border-color: rgba(154, 174, 255, 0.6);
+  box-shadow: 0 0 22px rgba(154, 174, 255, 0.45);
+}
+
+
+/* Product count colors */
+.total-products p { color: #ffffff; }
+.sneakers p { color: #3fffdc; }   /* aqua */
+.tshirt p { color: #ff8bdc; }     /* pink */
+.pant p { color: #ffb347; }       /* orange */
+.hoodie p { color: #9aaeff; }     /* steel blue */
+
+
+/* =========================
+   PRODUCT CARD HOVER
+========================= */
+
+.card.total-products:hover {
+  border-color: #ffffff;
+  box-shadow: 0 0 22px rgba(255, 255, 255, 0.35);
+}
+
+.card.sneakers:hover {
+  border-color: #3fffdc;
+  box-shadow: 0 0 24px rgba(63, 255, 220, 0.5);
+}
+
+.card.tshirt:hover {
+  border-color: #ff8bdc;
+  box-shadow: 0 0 24px rgba(255, 139, 220, 0.5);
+}
+
+.card.pant:hover {
+  border-color: #ffb347;
+  box-shadow: 0 0 24px rgba(255, 179, 71, 0.5);
+}
+
+.card.hoodie:hover {
+  border-color: #9aaeff;
+  box-shadow: 0 0 24px rgba(154, 174, 255, 0.5);
+}
+
+.card.total-products { color: #ffffff; }
+.card.sneakers { color: #3fffdc; }
+.card.tshirt { color: #ff8bdc; }
+.card.pant { color: #ffb347; }
+.card.hoodie { color: #9aaeff; }
+
+.card:hover .icon,
+.card:hover p {
+  color: currentColor;
+  filter: drop-shadow(0 0 8px currentColor);
+}
+
+.card:hover .icon {
+  transform: scale(1.12);
+}
+
+
+/* hover এ text + icon same colour */
+.card.total-products:hover p,
+.card.sneakers:hover p,
+.card.tshirt:hover p,
+.card.pant:hover p,
+.card.hoodie:hover p {
+  color: currentColor;
+}
+
+.card.total-products:hover .icon,
+.card.sneakers:hover .icon,
+.card.tshirt:hover .icon,
+.card.pant:hover .icon,
+.card.hoodie:hover .icon {
+  filter: drop-shadow(0 0 6px currentColor);
+  transform: scale(1.08);
+}
+
+
+.card.pending { color: #ff9800; }
+.card.confirm { color: #4caf50; }
+.card.shipped { color: #03a9f4; }
+.card.out-for-delivery { color: #baff39; }
+.card.delivered { color: #00e676; }
+.card.refunded { color: #9aaeff; }
+.card.cancelled { color: #f44336; }
+
+
+/* icon hover – same colour, no white */
+.card:hover .icon {
+  color: currentColor;
+  filter: drop-shadow(0 0 8px currentColor);
+  transform: scale(1.12);
+}
+
+.card:hover p {
+  filter: drop-shadow(0 0 6px currentColor);
+}

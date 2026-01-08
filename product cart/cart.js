@@ -3,205 +3,258 @@
 // ================================
 document.addEventListener("DOMContentLoaded", function () {
 
+  const token = localStorage.getItem("token");
+  const isLoggedIn = !!token;
+
   updateCartCount();
 
-
   // =================================
-  // ✅ ADD TO CART (PRODUCT PAGE)
+  // ✅ CART PAGE
   // =================================
-  const addToCartBtn = document.querySelector(".add-to-cart");
+  const tableBody = document.querySelector(".cart-page table");
+  const totalContainer = document.querySelector(".total-price table");
 
-  if (addToCartBtn) {
-    addToCartBtn.addEventListener("click", function (e) {
-      e.preventDefault();
+  // ✅ REMOVE MODAL ELEMENTS
+  const removeModal = document.getElementById("remove-modal");
+  const cancelRemoveBtn = document.getElementById("cancel-remove");
+  const confirmRemoveBtn = document.getElementById("confirm-remove");
+  let removeIndex = null;
 
-      // ✅ Product Size (NEW)
-      const sizeSelect = document.getElementById("product-size");
-      const selectedSize = sizeSelect ? sizeSelect.value : "";
-
-      // ❌ size না নিলে add হবে না
-      if (!selectedSize) {
-        showToast("⚠️ Please select a size first", "warn");
-        return;
-      }
-
-      // ✅ Product Name
-      const productName =
-        document.querySelector(".product-title")?.textContent.trim() ||
-        document.querySelector("h1")?.textContent.trim() ||
-        "Unknown Product";
-
-      // ✅ Product Price
-      const priceText =
-        document.querySelector(".product-price")?.textContent.replace(/[^0-9.]/g, "") ||
-        document.querySelector("h4")?.textContent.replace(/[^0-9.]/g, "") ||
-        "0";
-
-      const price = parseFloat(priceText);
-
-      // ✅ Quantity
-      const quantity =
-        parseInt(document.querySelector("input[type='number']")?.value) || 1;
-
-      // ✅ Product Image
-      const imgSrc =
-        document.querySelector(".product-img")?.src || "";
-
-      // ✅ Product Object (SIZE INCLUDED ✅)
-      const product = {
-        name: productName,
-        price: price,
-        quantity: quantity,
-        size: selectedSize,
-        image: imgSrc
-      };
-
-      // ✅ Load Cart
-      let cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-      // ✅ Same product + same size check
-      const existingProduct = cart.find(
-        item => item.name === product.name && item.size === product.size
-      );
-
-      if (existingProduct) {
-        existingProduct.quantity += quantity;
-      } else {
-        cart.push(product);
-      }
-
-      // ✅ Save to localStorage
-      localStorage.setItem("cart", JSON.stringify(cart));
-
-      updateCartCount();
-
-
-      // ✅ Fly animation (UNCHANGED ✅)
-      flyToCart();
-    });
+  function getCartDeliveryCharge() {
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (!user || !user.city) return 120;
+    const city = user.city.toLowerCase().trim();
+    return city === "dhaka" || city === "ঢাকা" ? 60 : 120;
   }
 
+  if (tableBody && totalContainer) {
 
-// =================================
-// ✅ CART PAGE
-// =================================
-const tableBody = document.querySelector(".cart-page table");
-const totalContainer = document.querySelector(".total-price table");
+    let cart = [];
+    let cartLoaded = false; // ✅ FIX (important)
 
+    if (isLoggedIn) {
+      loadCartFromDB();
+    } else {
+      // ✅ GUEST CART LOAD
+      cart = (JSON.parse(localStorage.getItem("guestCart")) || []).map(item => ({
+        id: item.productId,
+        name: item.name,
+        image: item.image.startsWith("http")
+          ? item.image.replace("http://localhost:5000", "")
+          : item.image,
+        price: item.price,
+        quantity: item.qty,
+        size: item.size
+      }));
 
-// ✅ DELIVERY CHARGE (CITY BASED)
-
-function getCartDeliveryCharge() {
-  const user = JSON.parse(localStorage.getItem("user"));
-
-  if (!user || !user.city) return 120;
-
-  const city = user.city.toLowerCase().trim();
-  return city === "dhaka" || city === "ঢাকা" ? 60 : 120;
-}
-
-
-if (tableBody && totalContainer) {
-
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-  function updateCartDisplay() {
-
-    const rows = tableBody.querySelectorAll("tr");
-    rows.forEach((row, index) => {
-      if (index > 0) row.remove();
-    });
-
-    let subtotal = 0;
-
-    cart.forEach((item, index) => {
-
-      const row = document.createElement("tr");
-      const total = item.price * item.quantity;
-      subtotal += total;
-
-      row.innerHTML = `
-        <td>
-          <div class="cart-info">
-            <img src="${item.image}" width="80">
-            <div>
-              <p>${item.name}</p>
-              <small>Size: ${item.size}</small><br>
-              <small>Price: ৳ ${item.price.toFixed(2)}</small><br>
-              <a href="#" class="remove" data-index="${index}">Remove</a>
-            </div>
-          </div>
-        </td>
-        <td>
-          <input type="number" min="1" value="${item.quantity}"
-            class="qty" data-index="${index}">
-        </td>
-        <td>৳ ${total.toFixed(2)}</td>
-      `;
-
-      tableBody.appendChild(row);
-    });
-
-    // 🔥 AUTO DELIVERY CHARGE
-    const deliveryCharge = getCartDeliveryCharge();
-
-    const totalAmount = subtotal + deliveryCharge;
-
-    totalContainer.innerHTML = `
-      <tr>
-        <td>Subtotal</td>
-        <td>৳ ${subtotal.toFixed(2)}</td>
-      </tr>
-      <tr>
-        <td>Delivery Charge</td>
-        <td>৳ ${deliveryCharge.toFixed(2)}</td>
-      </tr>
-      <tr>
-        <td><strong>Total</strong></td>
-        <td><strong>৳ ${totalAmount.toFixed(2)}</strong></td>
-      </tr>
-    `;
-  }
-
-
-  // ✅ Quantity change
-  tableBody.addEventListener("change", function (e) {
-    if (e.target.classList.contains("qty")) {
-      const index = e.target.dataset.index;
-      cart[index].quantity = parseInt(e.target.value);
-      localStorage.setItem("cart", JSON.stringify(cart));
+      cartLoaded = true;
       updateCartDisplay();
       updateCartCount();
     }
-  });
 
+    // ===============================
+    // 🔥 LOAD CART FROM DB (LOGIN)
+    // ===============================
+    async function loadCartFromDB() {
+      const res = await fetch("http://localhost:5000/api/cart", {
+        headers: {
+          "Authorization": `Bearer ${token}`
+        }
+      });
 
-  // ✅ REMOVE ITEM MODAL
-  const removeModal = document.getElementById("remove-modal");
-  const cancelBtn = document.getElementById("cancel-remove");
-  const confirmBtn = document.getElementById("confirm-remove");
-  let removeIndex = null;
+      const data = await res.json();
 
-  tableBody.addEventListener("click", e => {
-    if (e.target.classList.contains("remove")) {
+      cart = (data.items || []).map(item => ({
+        id: item.product._id,
+        name: item.product.name,
+        image: item.product.image,
+        price: item.price,
+        quantity: item.qty,
+        size: item.size
+      }));
+
+      cartLoaded = true; // ✅ FIX
+      updateCartDisplay();
+      updateCartCount();
+    }
+
+    // ===============================
+    // ✅ DISPLAY CART
+    // ===============================
+    function updateCartDisplay() {
+
+      // ✅ FIX: DB load শেষ না হলে empty ধরবে না
+      if (!cartLoaded) return;
+
+      tableBody.querySelectorAll("tr").forEach((r, i) => i > 0 && r.remove());
+
+      let subtotal = 0;
+
+      cart.forEach((item, index) => {
+        const total = item.price * item.quantity;
+        subtotal += total;
+
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td>
+            <div class="cart-info">
+              <img src="http://localhost:5000${item.image}" width="80">
+              <div>
+                <p>${item.name}</p>
+                <small>Size: ${item.size}</small><br>
+                <small>Price: ৳ ${item.price}</small><br>
+                <a href="#" class="remove" data-index="${index}">Remove</a>
+              </div>
+            </div>
+          </td>
+
+<td>
+  <input 
+    type="number" 
+    min="1" 
+    value="${item.quantity}"
+    class="qty-input"
+    data-index="${index}"
+  >
+</td>
+
+          <td>৳ ${total}</td>
+        `;
+
+        tableBody.appendChild(row);
+      });
+
+      const deliveryCharge = getCartDeliveryCharge();
+      totalContainer.innerHTML = `
+        <tr><td>Subtotal</td><td>৳ ${subtotal}</td></tr>
+        <tr><td>Delivery</td><td>৳ ${deliveryCharge}</td></tr>
+        <tr><td><strong>Total</strong></td><td><strong>৳ ${subtotal + deliveryCharge}</strong></td></tr>
+      `;
+    }
+
+    // ===============================
+    // 🔔 REMOVE CLICK → SHOW MODAL
+    // ===============================
+    tableBody.addEventListener("click", (e) => {
+      if (!e.target.classList.contains("remove")) return;
+
       e.preventDefault();
       removeIndex = e.target.dataset.index;
       removeModal.style.display = "flex";
-    }
-  });
+    });
 
-  cancelBtn.onclick = () => removeModal.style.display = "none";
+    cancelRemoveBtn.addEventListener("click", () => {
+      removeModal.style.display = "none";
+      removeIndex = null;
+    });
 
-  confirmBtn.onclick = () => {
-    cart.splice(removeIndex, 1);
-    localStorage.setItem("cart", JSON.stringify(cart));
-    updateCartDisplay();
-    updateCartCount();
-    removeModal.style.display = "none";
-  };
+    confirmRemoveBtn.addEventListener("click", async () => {
 
+      if (removeIndex === null) return;
+
+      const item = cart[removeIndex];
+      if (!item) return;
+
+      if (isLoggedIn) {
+        await fetch(
+          `http://localhost:5000/api/cart/remove/${item.id}?size=${item.size}`,
+          {
+            method: "DELETE",
+            headers: {
+              "Authorization": `Bearer ${token}`
+            }
+          }
+        );
+
+        await loadCartFromDB();
+      } else {
+        cart.splice(removeIndex, 1);
+
+        const rawGuestCart = cart.map(item => ({
+          productId: item.id,
+          name: item.name,
+          image: item.image,
+          price: item.price,
+          qty: item.quantity,
+          size: item.size
+        }));
+
+        localStorage.setItem("guestCart", JSON.stringify(rawGuestCart));
+        updateCartDisplay();
+        updateCartCount();
+      }
+
+      removeModal.style.display = "none";
+      removeIndex = null;
+    });
+
+    // ===============================
+// 🔄 QTY CHANGE (NO RELOAD)
+// ===============================
+tableBody.addEventListener("input", async (e) => {
+  if (!e.target.classList.contains("qty-input")) return;
+
+  const index = e.target.dataset.index;
+  let newQty = parseInt(e.target.value);
+
+  if (isNaN(newQty) || newQty < 1) {
+    newQty = 1;
+    e.target.value = 1;
+  }
+
+  const item = cart[index];
+  if (!item) return;
+
+  // 🔐 LOGIN USER → DB UPDATE
+  if (isLoggedIn) {
+    await fetch("http://localhost:5000/api/cart/update", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
+      },
+      body: JSON.stringify({
+        productId: item.id,
+        size: item.size,
+        qty: newQty
+      })
+    });
+  }
+  // 👤 GUEST → localStorage UPDATE
+  else {
+    cart[index].quantity = newQty;
+
+    const rawGuestCart = cart.map(p => ({
+      productId: p.id,
+      name: p.name,
+      image: p.image,
+      price: p.price,
+      qty: p.quantity,
+      size: p.size
+    }));
+
+    localStorage.setItem("guestCart", JSON.stringify(rawGuestCart));
+  }
+
+  // 🔄 UI + NAVBAR UPDATE
+  cart[index].quantity = newQty;
   updateCartDisplay();
-}
+  updateCartCount();
+});
+
+
+  }
+});
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -256,18 +309,19 @@ if (cancelPopupBtn) {
 }
 
 
-// ================================
-// STEP 1 → OPEN CONFIRM POPUP
+/// ================================
+// STEP 1 → OPEN CONFIRM POPUP (DB FIX)
 // ================================
 if (confirmBtn) {
-  confirmBtn.addEventListener("click", function () {
+  confirmBtn.addEventListener("click", async function () {
+
     const user = JSON.parse(localStorage.getItem("user"));
+    const token = localStorage.getItem("token");
 
     if (!user) {
-    document.getElementById("loginGuestPopup").style.display = "flex";
-    return;
-}
-
+      document.getElementById("loginGuestPopup").style.display = "flex";
+      return;
+    }
 
     if (!user.name || !user.phone || !user.address || !user.city) {
       Swal.fire({
@@ -282,8 +336,34 @@ if (confirmBtn) {
       return;
     }
 
-    const cart = JSON.parse(localStorage.getItem("cart")) || [];
-    if (cart.length === 0) return Swal.fire("Cart is empty!");
+    // =========================
+    // 🔥 LOGIN USER → LOAD CART FROM DB
+    // =========================
+    let cart = [];
+
+    if (token) {
+      const res = await fetch("http://localhost:5000/api/cart", {
+        headers: {
+          "Authorization": `Bearer ${token}`
+        }
+      });
+
+      const data = await res.json();
+
+      cart = (data.items || []).map(item => ({
+        id: item.product._id,
+        name: item.product.name,
+        image: `http://localhost:5000${item.product.image}`, // 🔥 FIX
+        price: item.price,
+        quantity: item.qty,
+        size: item.size
+      }));
+    }
+
+    if (cart.length === 0) {
+      Swal.fire("Cart is empty!");
+      return;
+    }
 
     popupCart = JSON.parse(JSON.stringify(cart));
     currentIndex = 0;
@@ -490,17 +570,21 @@ if (res.ok) {
 
 
 
-  // 🟢 FIX: ordered items remove from cart
-  let mainCart = JSON.parse(localStorage.getItem("cart")) || [];
+// 🟢 LOGIN USER → REMOVE ORDERED ITEMS FROM DB CART
+for (const item of popupCart) {
+  await fetch(
+    `http://localhost:5000/api/cart/remove/${item.id}?size=${item.size}`,
+    {
+      method: "DELETE",
+      headers: {
+        "Authorization": `Bearer ${token}`
+      }
+    }
+  );
+}
 
-  popupCart.forEach(orderItem => {
-    mainCart = mainCart.filter(c =>
-      !(c.id === orderItem.id && c.size === orderItem.size)
-    );
-  });
+updateCartCount();
 
-  localStorage.setItem("cart", JSON.stringify(mainCart));
-  updateCartCount();
 
   step2Popup.style.display = "none";
   setTimeout(() => location.reload(), 1200);
@@ -530,84 +614,9 @@ document.getElementById("invPayment").addEventListener("change", function () {
 
 
 
-
-
-
-// =================================
-// ✅ ADD TO CART FLY ANIMATION (WORKING ✅)
-// =================================
-function flyToCart() {
-
-  const productImg = document.querySelector(".product-img");
-  const cartIcon = document.getElementById("cart-icon");
-
-  if (!productImg || !cartIcon) return;
-
-  const img = productImg.cloneNode(true);
-  const imgRect = productImg.getBoundingClientRect();
-  const cartRect = cartIcon.getBoundingClientRect();
-
-  img.classList.add("fly-img");
-  img.style.position = "fixed";
-  img.style.left = imgRect.left + "px";
-  img.style.top = imgRect.top + "px";
-  img.style.width = imgRect.width + "px";
-  img.style.zIndex = "9999";
-
-  document.body.appendChild(img);
-
-  setTimeout(() => {
-    img.style.left = cartRect.left + "px";
-    img.style.top = cartRect.top + "px";
-    img.style.width = "20px";
-    img.style.opacity = "0";
-  }, 50);
-
-  setTimeout(() => img.remove(), 900);
-}
-
-// alart ar jnno
-
-function showToast(message, type = "success") {
-  const toast = document.getElementById("toast");
-
-  if (!toast) return;
-
-  toast.textContent = message;
-  toast.className = `toast show ${type}`;
-
-  setTimeout(() => {
-    toast.className = "toast";
-  }, 2500);
-}
-
-
-
-// ============================
-// ✅ NAVBAR CART COUNT
-// ============================
-function updateCartCount() {
-  const cartCount = document.getElementById("cart-count");
-  if (!cartCount) return;
-
-  const cart = JSON.parse(localStorage.getItem("cart")) || [];
-  const totalQty = cart.reduce((sum, item) => sum + item.quantity, 0);
-
-  if (totalQty > 0) {
-    cartCount.textContent = totalQty;
-    cartCount.classList.add("show");
-
-    // ✅ bump animation restart
-    cartCount.classList.remove("bump");
-    void cartCount.offsetWidth;
-    cartCount.classList.add("bump");
-  } else {
-    cartCount.classList.remove("show");
-  }
-}
-});
-
-
+// ================================
+// LOGIN/GUEST POPUP
+// ================================ 
 
 // Popup selectors
 const lgPopup = document.getElementById("loginGuestPopup");

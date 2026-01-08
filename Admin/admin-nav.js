@@ -46,7 +46,7 @@ async function loadMessageCount() {
     const token = localStorage.getItem("token");
     if (!token) return;
 
-    const res = await fetch("http://localhost:5000/api/messages/count", {
+    const res = await fetch("https://kivan-backend.onrender.com/api/messages/count", {
       headers: {
         Authorization: `Bearer ${token}`
       }
@@ -75,7 +75,7 @@ async function loadOrderCount() {
     if (!token) return;
 
     const res = await fetch(
-      "http://localhost:5000/api/orders/admin/pending-count",
+      "https://kivan-backend.onrender.com/api/orders/admin/pending-count",
       {
         headers: {
           Authorization: `Bearer ${token}`

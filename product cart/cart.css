@@ -14,6 +14,279 @@
      --gradient-bg: radial-gradient(#fff, #ffd6d6);
 }
 
+body{
+    font-family: "Ancizar Sans", sans-serif;
+    background-color: var(--base-colour);
+    color: var(--text-colour);
+}
+
+/* ==================================
+   📱 MOBILE MENU – FINAL FIX
+================================== */
+
+@media only screen and (max-width: 800px) {
+
+  /* 🌞 LIGHT MODE */
+  body:not(.darkmode) nav ul#MenuItems {
+    background: rgba(255, 255, 255, 0.92);
+    box-shadow: 0 18px 45px rgba(0,0,0,0.18);
+    border-radius: 0 0 22px 22px;
+  }
+
+  body:not(.darkmode) nav ul#MenuItems li a {
+    color: #111;
+  }
+
+  /* 🌙 DARK MODE */
+  body.darkmode nav ul#MenuItems {
+    background: rgba(16, 20, 37, 0.95);
+    box-shadow: 0 18px 45px rgba(0,0,0,0.6);
+  }
+
+  body.darkmode nav ul#MenuItems li a {
+    color: #fff;
+  }
+
+}
+
+/* ===============================
+   📱 MOBILE NAV TEXT – LIGHT MODE
+================================ */
+
+@media only screen and (max-width: 800px) {
+  body:not(.darkmode) nav ul#MenuItems li a {
+    color: #111 !important;
+    font-weight: 500;
+  }
+}
+
+/* =========================================================
+   🔥 CART PAGE – PREMIUM UI UPGRADE (ALL IN ONE)
+========================================================= */
+
+/* =====================
+   CART TABLE CARD LOOK
+===================== */
+.cart-page table {
+  background: rgba(255,255,255,0.75);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+}
+
+.cart-page tr:not(:first-child) {
+  transition: background 0.25s ease;
+}
+
+.cart-page tr:not(:first-child):hover {
+  background: rgba(255, 82, 59, 0.06);
+}
+
+.cart-info img {
+  border-radius: 12px;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.18);
+}
+
+/* =====================
+   QUANTITY INPUT STYLE
+===================== */
+td input[type="number"] {
+  width: 55px;
+  height: 36px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  text-align: center;
+  font-weight: 600;
+  transition: 0.25s;
+}
+
+td input[type="number"]:focus {
+  outline: none;
+  border-color: #ff523b;
+  box-shadow: 0 0 10px rgba(255,82,59,0.35);
+}
+
+/* =====================
+   TOTAL / SUBTOTAL BOX
+===================== */
+.total-price table {
+  background: rgba(255,255,255,0.85);
+  border-radius: 16px;
+  margin-top: 15px;
+  padding: 10px;
+  box-shadow: 0 10px 26px rgba(0,0,0,0.18);
+}
+
+.total-price td {
+  padding: 14px 10px;
+  font-size: 15px;
+  font-weight: 400;
+}
+
+.total-price tr:last-child td {
+  font-size: 18px;
+  font-weight: 800;
+  color: #ff523b;
+}
+
+/* =====================
+   CONFIRM ORDER BUTTON
+===================== */
+#confirmOrderBtn {
+  position: relative;
+  overflow: hidden;
+}
+
+#confirmOrderBtn::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, rgba(255,255,255,0.35), transparent 70%);
+  opacity: 0;
+  transition: opacity .3s;
+}
+
+#confirmOrderBtn:hover::after {
+  opacity: 1;
+}
+
+/* =====================
+   MOBILE OPTIMIZATION
+===================== */
+@media (max-width: 600px) {
+
+  .cart-info {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .total-price table{
+    margin-top: 10px;
+  }
+
+  td img {
+    margin-bottom: 10px;
+  }
+
+  .order-action,
+  .cart-actions {
+    justify-content: center;
+  }
+
+  #confirmOrderBtn {
+    width: 100%;
+  }
+}
+
+/* =====================================================
+   🌙 CART PAGE – DARK MODE OVERRIDES (SAFE)
+===================================================== */
+
+/* Cart table */
+.darkmode .cart-page table {
+  background: rgba(20, 24, 45, 0.85);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.6);
+}
+
+/* Cart row hover */
+.darkmode .cart-page tr:not(:first-child):hover {
+  background: rgba(255, 82, 59, 0.12);
+}
+
+/* Cart text */
+.darkmode td,
+.darkmode th,
+.darkmode .cart-info p,
+.darkmode .cart-info small {
+  color: #ffffff;
+}
+
+/* Product image */
+.darkmode .cart-info img {
+  box-shadow: 0 6px 20px rgba(0,0,0,0.6);
+}
+
+/* Quantity input */
+.darkmode td input[type="number"] {
+  background: #101425;
+  color: #ffffff;
+  border: 1px solid rgba(255,255,255,0.2);
+}
+
+/* Total price box */
+.darkmode .total-price table {
+  background: rgba(16, 20, 37, 0.9);
+  box-shadow: 0 12px 35px rgba(0,0,0,0.65);
+}
+
+.darkmode .total-price td {
+  color: #ffffff;
+}
+
+.darkmode .total-price tr:last-child td {
+  color: #ff7b6a;
+}
+
+/* Remove button */
+.darkmode .remove {
+  background: linear-gradient(135deg, #ff5a3b, #ff2e2e);
+  box-shadow: 0 0 14px rgba(255,82,59,0.6);
+}
+
+/* Confirm order button */
+.darkmode #confirmOrderBtn {
+  background: linear-gradient(135deg, #ff5a3b, #ff2b2b);
+  box-shadow: 0 12px 32px rgba(255,82,59,0.55);
+}
+
+/* =====================================================
+   🌙 MODALS & POPUPS – DARK MODE
+===================================================== */
+
+.darkmode .modal-box,
+.darkmode .popup-box,
+.darkmode #step2Popup .popup-content,
+.darkmode .lg-box {
+  background: rgba(20, 24, 45, 0.9);
+  color: #ffffff;
+  border: 1px solid rgba(255,255,255,0.15);
+}
+
+/* Popup titles */
+.darkmode .popup-box h2,
+.darkmode #step2Popup h2,
+.darkmode .lg-box h2 {
+  color: #ffffff;
+}
+
+/* Popup text blocks */
+.darkmode .popup-box p,
+.darkmode #step2Popup .invoice-box p,
+.darkmode .popup-info {
+  background: rgba(255,255,255,0.08);
+  color: #ffffff;
+  border: 1px solid rgba(255,255,255,0.18);
+}
+
+/* Select dropdown */
+.darkmode #step2Popup select {
+  background: rgba(255,255,255,0.12);
+  color: #ffffff;
+}
+
+/* Cancel buttons */
+.darkmode .cancel-btn,
+.darkmode .btn-cancel,
+.darkmode #backToStep1 {
+  background: rgba(255,255,255,0.12);
+  color: #ffffff;
+  border: 1px solid rgba(255,255,255,0.2);
+}
+
+/* Login popup text */
+.darkmode .lg-box p {
+  color: #cccccc;
+}
 
 
 
@@ -125,11 +398,11 @@ nav ul li a.active {
 
 
 
-body{
-    font-family: "Ancizar Sans", sans-serif;
-    background-color: var(--base-colour);
-    color: var(--text-colour);
-}
+
+
+
+
+
 
 .darkmode{
     --base-colour: #070b1d;
@@ -633,6 +906,8 @@ th:last-child{
 
 
 
+
+
 /* media query for menu */
 
 @media only screen and (max-width: 800px) {
@@ -680,6 +955,7 @@ th:last-child{
 }
 
 }
+
 /* media query for foe less then 600 scn size */
 
 @media only screen and (max-width: 600px) {
@@ -1005,15 +1281,16 @@ th:last-child{
   z-index: 9999;
 }
 
-/* POPUP BOX */
+/* POPUP BOX (COMPACT VERSION) */
 .popup-box {
-  width: 500px;
-  padding: 38px 45px;
-  border-radius: 24px;
+  width: 460px;              /* 🔹 width একটু কম */
+  max-height: 93vh;          /* 🔥 mobile এ বেশি লম্বা হবে না */
+  padding: 28px 32px;        /* 🔥 ভিতরের space কমানো */
+  border-radius: 22px;
 
   background: rgba(255, 255, 255, 0.25);
-  backdrop-filter: blur(20px) saturate(160%);
-  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
 
   border: 1px solid rgba(255,255,255,0.4);
   box-shadow:
@@ -1022,18 +1299,35 @@ th:last-child{
 
   display: flex;
   flex-direction: column;
-  align-items: center;    /* 🟦 সবকিছু center এ আসবে কিন্তু নষ্ট হবে না */
-  gap: 24px;
+  align-items: center;
+  gap: 18px;                 /* 🔥 gap কম */
+  overflow-y: auto;          /* 🔥 content বেশি হলে scroll */
 }
+
 
 /* Popup Title */
 .popup-box h2 {
   text-align: center;
-  font-size: 28px;
+  font-size: 24px;
   font-weight: 800;
   color: #000;
   margin-bottom: 10px;
 }
+
+
+@media (max-width: 480px) {
+  .popup-box {
+    width: 92%;
+    padding: 22px 20px;
+    gap: 14px;
+    border-radius: 18px;
+  }
+
+  .popup-box h2 {
+    font-size: 22px;
+  }
+}
+
 
 /* SLIDER AREA */
 .popup-slider {
@@ -1077,7 +1371,7 @@ th:last-child{
   margin-bottom: 10px;   /* 🆕 নিচে gap */
   text-align: center;
   font-size: 17px;
-  font-weight: 700;
+  font-weight: 250;
   color: #222;
 }
 
@@ -1090,6 +1384,7 @@ th:last-child{
   padding: 15px;
   border-radius: 14px;
   font-size: 15px;
+  font-weight: 250;
   color: #111;
   box-sizing: border-box;
 }
@@ -1260,7 +1555,7 @@ th:last-child{
 #step2Popup h2 {
   text-align: center;
   font-size: 26px;
-  font-weight: 800;
+  font-weight: 400;
   color: #000;
   margin-bottom: 5px;
 }
@@ -1296,6 +1591,7 @@ th:last-child{
   border-radius: 14px;
   border: 1px solid rgba(255,255,255,0.5);
   backdrop-filter: blur(12px);
+  font-weight: 250;
 }
 
 /* Payment Select */
@@ -1306,7 +1602,7 @@ th:last-child{
   border: 1px solid rgba(255,255,255,0.5);
   background: rgba(255,255,255,0.65);
   font-size: 15px;
-  font-weight: 600;
+  font-weight: 300;
   cursor: pointer;
   backdrop-filter: blur(12px);
 }
@@ -1349,7 +1645,7 @@ th:last-child{
 }
 
 /* Mobile Responsive */
-@media (max-width: 450px) {
+@media (max-width: 600px) {
   #step2Popup .popup-content {
     padding: 20px;
     max-width: 92%;
@@ -1363,7 +1659,7 @@ th:last-child{
 
 #step2Popup label {
   color: #000;
-  font-weight: 700;
+  font-weight: 400;
   font-size: 15px;
 }
 
@@ -1503,4 +1799,89 @@ th:last-child{
   from { opacity: 0; transform: scale(0.85); }
   to { opacity: 1; transform: scale(1); }
 }
+
+
+
+/* ===============================
+   🌙 STEP–2 POPUP DARK MODE FIX
+   (MATCH WITH 1st POPUP)
+=============================== */
+
+/* Main popup box */
+.darkmode #step2Popup .popup-content {
+  background: rgba(20, 24, 45, 0.95);
+  border: 1px solid rgba(255,255,255,0.15);
+  color: #ffffff;
+}
+
+/* Invoice wrapper */
+.darkmode #step2Popup .invoice-box {
+  background: rgba(16, 20, 37, 0.95);
+  border: 1px solid rgba(255,255,255,0.12);
+  box-shadow:
+    0 12px 35px rgba(0,0,0,0.65);
+}
+
+/* All invoice text blocks */
+.darkmode #step2Popup .invoice-box p {
+  background: rgba(255,255,255,0.08);
+  color: #ffffff;
+  border: 1px solid rgba(255,255,255,0.15);
+}
+
+/* Product list spacing */
+.darkmode #invoiceList p {
+  margin-bottom: 10px;
+}
+
+/* Title + labels */
+.darkmode #step2Popup h2,
+.darkmode #step2Popup label {
+  color: #ffffff;
+}
+
+/* Payment dropdown */
+.darkmode #step2Popup select {
+  background: rgba(255,255,255,0.12);
+  color: #ffffff;
+  border: 1px solid rgba(255,255,255,0.2);
+}
+
+/* Back button */
+.darkmode #backToStep1 {
+  background: rgba(255,255,255,0.12);
+  color: #ffffff;
+  border: 1px solid rgba(255,255,255,0.2);
+}
+
+/* Place order button (keep glow) */
+.darkmode #finalConfirmBtn {
+  background: linear-gradient(135deg, #ff5a3b, #ff2b2b);
+  box-shadow: 0 12px 32px rgba(255,82,59,0.55);
+}
+
+/* ===============================
+   🔥 DARK MODE PAYMENT DROPDOWN FIX
+=============================== */
+
+/* Select box */
+.darkmode #step2Popup select {
+  background: rgba(255,255,255,0.12);
+  color: #ffffff;
+  border: 1px solid rgba(255,255,255,0.25);
+}
+
+/* Dropdown options */
+.darkmode #step2Popup select option {
+  background: #101425;   /* 🔥 dark bg */
+  color: #ffffff;        /* 🔥 white text */
+}
+
+/* Selected option (some browsers) */
+.darkmode #step2Popup select option:checked {
+  background: #ff523b;
+  color: #ffffff;
+}
+
+
 

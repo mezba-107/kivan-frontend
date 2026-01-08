@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
 
-    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const cart = JSON.parse(localStorage.getItem("guestCart")) || [];
 
     const guestCartItems = document.getElementById("guestCartItems");
     const guestSubtotal = document.getElementById("guestSubtotal");
@@ -21,12 +21,12 @@ document.addEventListener("DOMContentLoaded", function () {
         subtotal = 0;
 
         cart.forEach(item => {
-            const itemTotal = item.price * item.quantity;
+            const itemTotal = item.price * item.qty;
             subtotal += itemTotal;
 
             guestCartItems.innerHTML += `
                 <div class="cart-line">
-                    <span>${item.name} (Size: ${item.size}) × ${item.quantity}</span>
+                    <span>${item.name} (Size: ${item.size}) × ${item.qty}</span>
                     <span>৳${itemTotal}</span>
                 </div>
             `;
@@ -93,7 +93,7 @@ document.addEventListener("DOMContentLoaded", function () {
         };
 
         try {
-            const res = await fetch("https://kivan-backend.onrender.com/api/orders/guest-create", {
+            const res = await fetch("http://localhost:5000/api/orders/guest-create", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -114,12 +114,11 @@ document.addEventListener("DOMContentLoaded", function () {
             const popup = document.getElementById("successPopup");
             popup.style.display = "flex";
 
-            // ✅ SAVE GUEST PHONE (IMPORTANT)
-localStorage.setItem("guestPhone", phone);
-
+            // ✅ SAVE GUEST PHONE
+            localStorage.setItem("guestPhone", phone);
 
             // clear cart
-            localStorage.removeItem("cart");
+            localStorage.removeItem("guestCart");
 
             // ok button
             document.getElementById("popupOkBtn").onclick = () => {

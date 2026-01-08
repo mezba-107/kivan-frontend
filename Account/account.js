@@ -26,6 +26,21 @@ if (themeSwitch) {
 }
 
 
+// ==================== GLOBAL LOADER ====================
+const loader = document.getElementById("globalLoader");
+
+function showLoader(text = "Loading...") {
+  if (!loader) return;
+  loader.style.display = "flex";
+  loader.querySelector("p").innerText = text;
+}
+
+function hideLoader() {
+  if (!loader) return;
+  loader.style.display = "none";
+}
+
+
 // ==================== CUSTOM POPUP ====================
 function showPopup(title, message, isSuccess = true) {
   const popup = document.getElementById("customPopup");
@@ -34,7 +49,6 @@ function showPopup(title, message, isSuccess = true) {
   document.getElementById("popupTitle").innerText = title;
   document.getElementById("popupText").innerText = message;
 
-  // আগের class remove
   popup.classList.remove("success", "error");
 
   if (isSuccess) {
@@ -48,7 +62,6 @@ function showPopup(title, message, isSuccess = true) {
   popup.style.display = "flex";
 }
 
-
 function closePopup() {
   document.getElementById("customPopup").style.display = "none";
 }
@@ -61,7 +74,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const loginForm = document.getElementById("LoginForm");
   const registerForm = document.getElementById("RegForm");
 
-  const BASE_URL = "https://kivan-backend.onrender.com/api/auth"; // ✔ FIXED
+  const BASE_URL = "https://kivan-backend.onrender.com/api/auth";
+
 
 // ==================== SIGNUP ====================
 if (registerForm) {
@@ -72,13 +86,14 @@ if (registerForm) {
     const email = registerForm.querySelector("input[placeholder='Email']").value.trim();
     const password = registerForm.querySelector("input[placeholder='Password']").value;
 
-    // 🔴 Simple validation
     if (!name || !email || !password) {
       showPopup("Error", "All fields are required!", false);
       return;
     }
 
     try {
+      showLoader("Creating your account...");
+
       const res = await fetch(`${BASE_URL}/signup`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -86,59 +101,49 @@ if (registerForm) {
       });
 
       const data = await res.json();
+      hideLoader();
 
       if (res.ok) {
-
-        // 🔐 AUTO LOGIN
         localStorage.setItem("token", data.token);
         localStorage.setItem("user", JSON.stringify(data.user));
 
-        // ✅ Success Popup
         showPopup(
           "Signup Successful",
           "Your account has been created & you are now logged in"
         );
 
-        // ⏳ Redirect after popup
         setTimeout(() => {
           window.location.href = "/profile/profile.html";
         }, 2000);
-
       } else {
         showPopup("Signup Failed", data.message || "Signup failed", false);
       }
 
     } catch (err) {
+      hideLoader();
       console.error("Signup error:", err);
       showPopup("Error", "Server error. Please try again.", false);
     }
   });
 }
 
+
 // ==================== LOGIN ====================
 if (loginForm) {
   loginForm.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    const email = loginForm
-      .querySelector("input[placeholder='Email']")
-      .value.trim();
+    const email = loginForm.querySelector("input[placeholder='Email']").value.trim();
+    const password = loginForm.querySelector("input[placeholder='Password']").value;
 
-    const password = loginForm
-      .querySelector("input[placeholder='Password']")
-      .value;
-
-    // Empty check
     if (!email || !password) {
-      showPopup(
-        "Login Failed",
-        "Email and password are required",
-        false
-      );
+      showPopup("Login Failed", "Email and password are required", false);
       return;
     }
 
     try {
+      showLoader("Logging you in...");
+
       const res = await fetch(`${BASE_URL}/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -146,41 +151,30 @@ if (loginForm) {
       });
 
       const data = await res.json();
+      hideLoader();
 
-      // ✅ LOGIN SUCCESS
       if (res.ok) {
         localStorage.setItem("token", data.token);
         localStorage.setItem("user", JSON.stringify(data.user));
 
-        showPopup(
-          "Login Successful",
-          "You have logged in successfully"
-        );
+        showPopup("Login Successful", "You have logged in successfully");
 
         setTimeout(() => {
           window.location.href = "/index.html";
         }, 1500);
-
-      } 
-      // ❌ LOGIN FAILED
-      else {
-        showPopup(
-          "Login Failed",
-          data.message || "Invalid email or password",
-          false
-        );
+      } else {
+        showPopup("Login Failed", data.message || "Invalid email or password", false);
       }
 
     } catch (err) {
+      hideLoader();
       console.error("Login error:", err);
-      showPopup(
-        "Error",
-        "Server error. Please try again later.",
-        false
-      );
+      showPopup("Error", "Server error. Please try again later.", false);
     }
   });
 }
+
+});
 
 
 // ==================== SHOW USER NAME ON NAVBAR ====================
@@ -214,5 +208,4 @@ document.addEventListener("DOMContentLoaded", () => {
     logoutItem.appendChild(logoutLink);
     menuItems.appendChild(logoutItem);
   }
-});
 });

@@ -14,7 +14,7 @@ if (!productId) {
 // ==============================
 async function fetchSingleProduct() {
   try {
-    const res = await fetch(`https://kivan-backend.onrender.com/api/products/${productId}`);
+    const res = await fetch(`http://localhost:5000/api/products/${productId}`);
     const product = await res.json();
 
     if (!res.ok || !product) {
@@ -29,7 +29,13 @@ async function fetchSingleProduct() {
     document.getElementById("price").innerText = "৳" + product.price;
     document.getElementById("desc").innerText = product.description;
     document.getElementById("ProductImg").src =
-      "https://kivan-backend.onrender.com" + product.image;
+      "http://localhost:5000" + product.image;
+
+      // ✅ SET FOR CART (IMPORTANT)
+productName = product.name;
+price = product.price;
+image = "http://localhost:5000" + product.image;
+
 
     // ==============================
     // GALLERY (optional)
@@ -40,13 +46,13 @@ async function fetchSingleProduct() {
 
       product.gallery.forEach(img => {
         const image = document.createElement("img");
-        image.src = "https://kivan-backend.onrender.com" + img;
+        image.src = "http://localhost:5000" + img;
         image.width = 80;
         image.style.cursor = "pointer";
 
         image.onclick = () => {
           document.getElementById("ProductImg").src =
-            "https://kivan-backend.onrender.com" + img;
+            "http://localhost:5000" + img;
         };
 
         gallery.appendChild(image);
@@ -64,7 +70,7 @@ async function fetchSingleProduct() {
 // ==============================
 async function fetchRelatedProducts() {
   try {
-    const res = await fetch("https://kivan-backend.onrender.com/api/products");
+    const res = await fetch("http://localhost:5000/api/products");
     const products = await res.json();
 
     if (!Array.isArray(products)) return;
@@ -89,7 +95,7 @@ container.innerHTML += `
   <div class="col-4">
     <div class="related-card">
       <a href="/product/single-product.html?id=${p._id}">
-        <img src="https://kivan-backend.onrender.com${p.image}" alt="${p.name}">
+        <img src="http://localhost:5000${p.image}" alt="${p.name}">
       </a>
 
       <h4>${p.name}</h4>
@@ -99,7 +105,6 @@ container.innerHTML += `
 `;
 
     });
-
 
   } catch (err) {
     console.error("Related products error:", err);
@@ -114,3 +119,94 @@ container.innerHTML += `
 fetchSingleProduct();
 fetchRelatedProducts();
 
+let productName = "";
+let price = 0;
+let image = "";
+
+
+// ==============================
+// ADD TO CART (GUEST + LOGIN USER)
+// ==============================
+const addToCartBtn = document.querySelector(".add-to-cart");
+
+addToCartBtn.addEventListener("click", async () => {
+
+  // ======================
+  // SIZE VALIDATION (FOR ALL)
+  // ======================
+  const sizeSelect = document.getElementById("product-size");
+  const selectedSize = sizeSelect?.value;
+
+  if (!selectedSize) {
+    showToast("Please select a size ❗");
+    return;
+  }
+
+  const qty = Number(document.getElementById("qtyInput")?.value || 1);
+  const token = localStorage.getItem("token");
+
+  // ======================
+  // LOGIN USER → DB CART
+  // ======================
+  if (token) {
+    try {
+      const res = await fetch("http://localhost:5000/api/cart/add", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          productId,
+          qty,
+          size: selectedSize, // future-proof
+        }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        showToast(data.message || "Add to cart failed");
+        return;
+      }
+
+      showToast("Added to cart ✅");
+      triggerCartUpdate(); // ✅ ADD THIS
+      return;
+
+    } catch (err) {
+      console.error(err);
+      showToast("Server error");
+      return;
+    }
+  }
+
+
+// ======================
+// GUEST USER → LOCAL CART (FIXED)
+// ======================
+let cart = JSON.parse(localStorage.getItem("guestCart")) || [];
+
+const index = cart.findIndex(
+  item => item.productId === productId && item.size === selectedSize
+);
+
+if (index > -1) {
+  cart[index].qty += qty;
+} else {
+  cart.push({
+    productId: productId,
+    name: productName,
+    price: price,
+    qty: qty,
+    size: selectedSize,
+    image: image
+  });
+}
+
+localStorage.setItem("guestCart", JSON.stringify(cart));
+showToast("Added to cart 🛒");
+
+triggerCartUpdate(); // ✅ ADD THIS
+
+});

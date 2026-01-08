@@ -15,6 +15,176 @@
 }
 
 
+/* ==================================
+   📱 MOBILE MENU – FINAL FIX
+================================== */
+
+@media only screen and (max-width: 800px) {
+
+  /* 🌞 LIGHT MODE */
+  body:not(.darkmode) nav ul#MenuItems {
+    background: rgba(255, 255, 255, 0.92);
+    box-shadow: 0 18px 45px rgba(0,0,0,0.18);
+    border-radius: 0 0 22px 22px;
+  }
+
+  body:not(.darkmode) nav ul#MenuItems li a {
+    color: #111;
+  }
+
+  /* 🌙 DARK MODE */
+  body.darkmode nav ul#MenuItems {
+    background: rgba(16, 20, 37, 0.95);
+    box-shadow: 0 18px 45px rgba(0,0,0,0.6);
+  }
+
+  body.darkmode nav ul#MenuItems li a {
+    color: #fff;
+  }
+
+}
+
+/* ===============================
+   📱 MOBILE NAV TEXT – LIGHT MODE
+================================ */
+
+@media only screen and (max-width: 800px) {
+  body:not(.darkmode) nav ul#MenuItems li a {
+    color: #111 !important;
+    font-weight: 500;
+  }
+}
+
+/* ===============================
+   🌟 ACCOUNT PAGE GLASS LOOK
+================================ */
+
+.account-page {
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+}
+
+/* LEFT IMAGE */
+.account-page .col-2 img {
+  filter: drop-shadow(0 25px 45px rgba(0,0,0,0.45));
+  transform: scale(1.02);
+}
+
+/* ===============================
+   🔥 FORM CONTAINER (GLASS)
+================================ */
+
+.form-container {
+  background: linear-gradient(
+    145deg,
+    rgba(255,255,255,0.15),
+    rgba(255,255,255,0.05)
+  );
+  backdrop-filter: blur(18px);
+  border-radius: 24px;
+  width: 340px;
+  height: 420px;
+
+  box-shadow:
+    0 35px 80px rgba(0,0,0,0.55),
+    inset 0 0 0 1px rgba(255,255,255,0.18);
+}
+
+/* DARK MODE FIX */
+.darkmode .form-container {
+  background: linear-gradient(
+    145deg,
+    rgba(16,20,37,0.95),
+    rgba(16,20,37,0.85)
+  );
+}
+
+/* ===============================
+   🔄 LOGIN / REGISTER TABS
+================================ */
+
+.form-btn span {
+  font-size: 15px;
+  letter-spacing: 0.5px;
+  color: var(--secondary-text);
+}
+
+.form-btn span:hover {
+  color: #ff523b;
+}
+
+#Indicator {
+  border-radius: 999px;
+}
+
+/* ===============================
+   ✍️ INPUT FIELDS
+================================ */
+
+form input {
+  height: 42px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,82,59,0.4);
+  background: transparent;
+  color: var(--text-colour);
+  transition: all 0.3s ease;
+}
+
+form input::placeholder {
+  color: #999;
+}
+
+form input:focus {
+  border-color: #ff523b;
+  box-shadow: 0 0 0 4px rgba(255,82,59,0.18);
+}
+
+/* ===============================
+   🔥 BUTTON STYLE
+================================ */
+
+form .btn {
+  border-radius: 999px;
+  background: linear-gradient(135deg,#ff523b,#ff784e);
+  box-shadow:
+    0 12px 35px rgba(255,82,59,0.2);
+}
+
+form .btn:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 18px 45px rgba(255,82,59,0.75);
+}
+
+/* ===============================
+   🔗 FORGOT PASSWORD
+================================ */
+
+form a {
+  color: #ff523b;
+  opacity: 0.85;
+}
+
+form a:hover {
+  text-decoration: underline;
+}
+
+/* ===============================
+   📱 MOBILE POLISH
+================================ */
+
+@media (max-width: 768px) {
+  .account-page .row {
+    gap: 40px;
+  }
+
+  .form-container {
+    width: 100%;
+    max-width: 360px;
+  }
+}
+
 
 /* ===============================
    🌟 NAVBAR BEAUTIFICATION (FIXED)
@@ -120,7 +290,6 @@ nav ul li a.active {
 .menu-icon:hover {
     transform: scale(1.15);
 }
-
 
 
 
@@ -532,7 +701,6 @@ form a{
 }
 
 }
-
 /* media query for foe less then 600 scn size */
 
 @media only screen and (max-width: 600px) {
@@ -743,5 +911,50 @@ form a{
   }
   100% {
     box-shadow: 0 0 0 0 rgba(0,0,0,0);
+  }
+}
+
+
+
+/* =========================
+   GLOBAL LOADER
+========================= */
+
+.loader-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(11, 16, 32, 0.92);
+  backdrop-filter: blur(6px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.loader-box {
+  text-align: center;
+}
+
+.loader-box p {
+  margin-top: 14px;
+  font-size: 14px;
+  color: #cbd5ff;
+  letter-spacing: 1px;
+}
+
+/* Spinner */
+.spinner {
+  width: 56px;
+  height: 56px;
+  border: 4px solid rgba(255, 255, 255, 0.15);
+  border-top: 4px solid #3fffdc;
+  border-radius: 50%;
+  animation: spin 0.9s linear infinite;
+  box-shadow: 0 0 18px rgba(63, 255, 220, 0.6);
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
   }
 }

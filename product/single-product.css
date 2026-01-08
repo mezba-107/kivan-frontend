@@ -20,7 +20,189 @@ body{
     color: var(--text-colour);
 }
 
+/* ==================================
+   📱 MOBILE MENU – FINAL FIX
+================================== */
 
+@media only screen and (max-width: 800px) {
+
+  /* 🌞 LIGHT MODE */
+  body:not(.darkmode) nav ul#MenuItems {
+    background: rgba(255, 255, 255, 0.92);
+    box-shadow: 0 18px 45px rgba(0,0,0,0.18);
+    border-radius: 0 0 22px 22px;
+  }
+
+  body:not(.darkmode) nav ul#MenuItems li a {
+    color: #111;
+  }
+
+  /* 🌙 DARK MODE */
+  body.darkmode nav ul#MenuItems {
+    background: rgba(16, 20, 37, 0.95);
+    box-shadow: 0 18px 45px rgba(0,0,0,0.6);
+  }
+
+  body.darkmode nav ul#MenuItems li a {
+    color: #fff;
+  }
+
+}
+
+/* ===============================
+   📱 MOBILE NAV TEXT – LIGHT MODE
+================================ */
+
+@media only screen and (max-width: 800px) {
+  body:not(.darkmode) nav ul#MenuItems li a {
+    color: #111 !important;
+    font-weight: 500;
+  }
+}
+
+/* ===============================
+   🔥 SINGLE PRODUCT – PREMIUM UI
+=============================== */
+
+.single-product {
+  margin-top: 100px;
+}
+
+.single-product .row {
+  background: rgba(255, 255, 255, 0.75);
+  border-radius: 22px;
+  padding: 40px;
+  box-shadow: 0 25px 60px rgba(0,0,0,0.12);
+  margin-bottom: 20px;
+}
+
+.darkmode .single-product .row {
+  background: rgba(16, 20, 37, 0.85);
+  box-shadow: 0 30px 70px rgba(0,0,0,0.6);
+}
+
+
+/* ===============================
+   🖼️ MAIN PRODUCT IMAGE
+=============================== */
+
+.product-img {
+  border-radius: 18px;
+  transition: transform 0.45s ease, box-shadow 0.45s ease;
+}
+
+.product-img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 25px 55px rgba(0,0,0,0.35);
+}
+
+
+/* ===============================
+   🖼️ GALLERY THUMBNAILS
+=============================== */
+
+.small-img-row img {
+  border-radius: 10px;
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.small-img-row img:hover {
+  border-color: #ff523b;
+  transform: scale(1.08);
+}
+
+
+/* ===============================
+   📝 TITLE & PRICE
+=============================== */
+
+.single-product h1 {
+  font-size: 42px;
+  line-height: 1.2;
+}
+
+.single-product h4 {
+  font-size: 26px;
+  color: #ff523b;
+}
+
+
+/* ===============================
+   📏 SIZE SELECT
+=============================== */
+
+.single-product select {
+  border-radius: 999px;
+  padding: 12px 18px;
+  font-weight: 600;
+  background: transparent;
+  cursor: pointer;
+}
+
+.darkmode .single-product select {
+  background: #101425;
+  color: #ffffff;
+}
+
+
+/* ===============================
+   🔢 QUANTITY INPUT
+=============================== */
+
+.single-product input[type="number"] {
+  border-radius: 10px;
+  text-align: center;
+}
+
+
+/* ===============================
+   🛒 ADD TO CART BUTTON
+=============================== */
+
+.add-to-cart {
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  box-shadow: 0 10px 30px rgba(255,82,59,0.45);
+  transition: all 0.3s ease;
+}
+
+.add-to-cart:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 15px 40px rgba(255,82,59,0.6);
+}
+
+
+/* ===============================
+   📄 PRODUCT DETAILS
+=============================== */
+
+.single-product h3 {
+  margin-top: 35px;
+  font-size: 20px;
+}
+
+.single-product #desc {
+  font-size: 15px;
+  line-height: 1.8;
+  margin-top: 10px;
+}
+
+
+/* ===============================
+   📱 MOBILE FIX
+=============================== */
+
+@media (max-width: 600px) {
+  .single-product .row {
+    padding: 20px;
+  }
+
+  .single-product h1 {
+    font-size: 28px;
+  }
+}
 
 
 
@@ -586,39 +768,6 @@ select:focus{
 }
 
 
-/* Toast Style */
-.toast {
-  position: fixed;
-  bottom: 30px;
-  right: 30px;
-  background: #222;
-  color: #fff;
-  padding: 14px 20px;
-  border-radius: 8px;
-  font-size: 14px;
-  opacity: 0;
-  pointer-events: none;
-  transform: translateY(20px);
-  transition: all 0.4s ease;
-  z-index: 99999;
-}
-
-/* Show State */
-.toast.show {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Warning */
-.toast.warn {
-  background: #ff523b;
-}
-
-/* Success */
-.toast.success {
-  background: #ffffff;
-}
-
 
 /* cart count */
 
@@ -833,3 +982,38 @@ select:focus{
 }
 
 
+
+/* =========================
+   TOAST POPUP STYLE
+========================= */
+#toast {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  background: #222;
+  color: #fff;
+  padding: 14px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(20px);
+  transition: all 0.35s ease;
+  z-index: 999999;
+}
+
+/* show */
+#toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* warning */
+#toast.warn {
+  background: #ff523b;
+}
+
+/* success */
+#toast.success {
+  background: #2ecc71;
+}
