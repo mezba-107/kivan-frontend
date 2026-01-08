@@ -93,7 +93,7 @@ document.addEventListener("DOMContentLoaded", function () {
         };
 
         try {
-            const res = await fetch("http://localhost:5000/api/orders/guest-create", {
+            const res = await fetch("https://kivan-backend.onrender.com/api/orders/guest-create", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

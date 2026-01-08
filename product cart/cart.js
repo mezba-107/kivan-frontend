@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function () {
         id: item.productId,
         name: item.name,
         image: item.image.startsWith("http")
-          ? item.image.replace("http://localhost:5000", "")
+          ? item.image.replace("https://kivan-backend.onrender.com", "")
           : item.image,
         price: item.price,
         quantity: item.qty,
@@ -56,7 +56,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // 🔥 LOAD CART FROM DB (LOGIN)
     // ===============================
     async function loadCartFromDB() {
-      const res = await fetch("http://localhost:5000/api/cart", {
+      const res = await fetch("https://kivan-backend.onrender.com/api/cart", {
         headers: {
           "Authorization": `Bearer ${token}`
         }
@@ -98,7 +98,7 @@ document.addEventListener("DOMContentLoaded", function () {
         row.innerHTML = `
           <td>
             <div class="cart-info">
-              <img src="http://localhost:5000${item.image}" width="80">
+              <img src="https://kivan-backend.onrender.com${item.image}" width="80">
               <div>
                 <p>${item.name}</p>
                 <small>Size: ${item.size}</small><br>
@@ -157,7 +157,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       if (isLoggedIn) {
         await fetch(
-          `http://localhost:5000/api/cart/remove/${item.id}?size=${item.size}`,
+          `https://kivan-backend.onrender.com/api/cart/remove/${item.id}?size=${item.size}`,
           {
             method: "DELETE",
             headers: {
@@ -207,7 +207,7 @@ tableBody.addEventListener("input", async (e) => {
 
   // 🔐 LOGIN USER → DB UPDATE
   if (isLoggedIn) {
-    await fetch("http://localhost:5000/api/cart/update", {
+    await fetch("https://kivan-backend.onrender.com/api/cart/update", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -342,7 +342,7 @@ if (confirmBtn) {
     let cart = [];
 
     if (token) {
-      const res = await fetch("http://localhost:5000/api/cart", {
+      const res = await fetch("https://kivan-backend.onrender.com/api/cart", {
         headers: {
           "Authorization": `Bearer ${token}`
         }
@@ -353,7 +353,7 @@ if (confirmBtn) {
       cart = (data.items || []).map(item => ({
         id: item.product._id,
         name: item.product.name,
-        image: `http://localhost:5000${item.product.image}`, // 🔥 FIX
+        image: `https://kivan-backend.onrender.com${item.product.image}`, // 🔥 FIX
         price: item.price,
         quantity: item.qty,
         size: item.size
@@ -546,7 +546,7 @@ const orderData = {
 
 
     try {
-      const res = await fetch("http://localhost:5000/api/orders/create", {
+      const res = await fetch("https://kivan-backend.onrender.com/api/orders/create", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -573,7 +573,7 @@ if (res.ok) {
 // 🟢 LOGIN USER → REMOVE ORDERED ITEMS FROM DB CART
 for (const item of popupCart) {
   await fetch(
-    `http://localhost:5000/api/cart/remove/${item.id}?size=${item.size}`,
+    `https://kivan-backend.onrender.com/api/cart/remove/${item.id}?size=${item.size}`,
     {
       method: "DELETE",
       headers: {

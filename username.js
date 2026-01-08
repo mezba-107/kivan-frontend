@@ -111,7 +111,7 @@ async function updateCartCount() {
   // LOGIN USER → DB CART
   if (token) {
     try {
-      const res = await fetch("http://localhost:5000/api/cart", {
+      const res = await fetch("https://kivan-backend.onrender.com/api/cart", {
         headers: {
           Authorization: `Bearer ${token}`
         }

@@ -16,10 +16,10 @@ let apiUrl = "";
 let headers = {};
 
 if (token) {
-  apiUrl = `http://localhost:5000/api/orders/${orderId}`;
+  apiUrl = `https://kivan-backend.onrender.com/api/orders/${orderId}`;
   headers = { Authorization: `Bearer ${token}` };
 } else {
-  apiUrl = `http://localhost:5000/api/orders/guest-invoice/${orderId}`;
+  apiUrl = `https://kivan-backend.onrender.com/api/orders/guest-invoice/${orderId}`;
 }
 
 // 🔥 FETCH INVOICE

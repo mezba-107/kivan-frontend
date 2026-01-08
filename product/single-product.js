@@ -4,17 +4,20 @@
 const params = new URLSearchParams(window.location.search);
 const productId = params.get("id");
 
+console.log("PRODUCT ID:", productId);
+
 if (!productId) {
   document.body.innerHTML = "<h1>Product not found</h1>";
   throw new Error("No product id");
 }
+
 
 // ==============================
 // FETCH SINGLE PRODUCT
 // ==============================
 async function fetchSingleProduct() {
   try {
-    const res = await fetch(`http://localhost:5000/api/products/${productId}`);
+    const res = await fetch(`https://kivan-backend.onrender.com/api/products/${productId}`);
     const product = await res.json();
 
     if (!res.ok || !product) {
@@ -29,12 +32,12 @@ async function fetchSingleProduct() {
     document.getElementById("price").innerText = "৳" + product.price;
     document.getElementById("desc").innerText = product.description;
     document.getElementById("ProductImg").src =
-      "http://localhost:5000" + product.image;
+      "https://kivan-backend.onrender.com" + product.image;
 
       // ✅ SET FOR CART (IMPORTANT)
 productName = product.name;
 price = product.price;
-image = "http://localhost:5000" + product.image;
+image = "https://kivan-backend.onrender.com" + product.image;
 
 
     // ==============================
@@ -46,13 +49,13 @@ image = "http://localhost:5000" + product.image;
 
       product.gallery.forEach(img => {
         const image = document.createElement("img");
-        image.src = "http://localhost:5000" + img;
+        image.src = "https://kivan-backend.onrender.com" + img;
         image.width = 80;
         image.style.cursor = "pointer";
 
         image.onclick = () => {
           document.getElementById("ProductImg").src =
-            "http://localhost:5000" + img;
+            "https://kivan-backend.onrender.com" + img;
         };
 
         gallery.appendChild(image);
@@ -70,7 +73,7 @@ image = "http://localhost:5000" + product.image;
 // ==============================
 async function fetchRelatedProducts() {
   try {
-    const res = await fetch("http://localhost:5000/api/products");
+    const res = await fetch("https://kivan-backend.onrender.com/api/products");
     const products = await res.json();
 
     if (!Array.isArray(products)) return;
@@ -95,7 +98,7 @@ container.innerHTML += `
   <div class="col-4">
     <div class="related-card">
       <a href="/product/single-product.html?id=${p._id}">
-        <img src="http://localhost:5000${p.image}" alt="${p.name}">
+        <img src="https://kivan-backend.onrender.com${p.image}" alt="${p.name}">
       </a>
 
       <h4>${p.name}</h4>
@@ -150,7 +153,7 @@ addToCartBtn.addEventListener("click", async () => {
   // ======================
   if (token) {
     try {
-      const res = await fetch("http://localhost:5000/api/cart/add", {
+      const res = await fetch("https://kivan-backend.onrender.com/api/cart/add", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -210,3 +213,122 @@ showToast("Added to cart 🛒");
 triggerCartUpdate(); // ✅ ADD THIS
 
 });
+
+
+// ==============================
+// PRODUCT RATING (FINAL FIXED)
+// ==============================
+let selectedRating = 0;
+
+const stars = document.querySelectorAll("#rating-stars i");
+const submitBtn = document.getElementById("submitRating");
+const msg = document.getElementById("rating-msg");
+const avgRatingEl = document.getElementById("avg-rating");
+
+// ==============================
+// ⭐ STAR SELECT (USER CLICK)
+// ==============================
+stars.forEach((star, index) => {
+  star.dataset.value = index + 1; // ⭐ IMPORTANT FIX
+
+  star.addEventListener("click", () => {
+    selectedRating = Number(star.dataset.value);
+
+    fillStars(selectedRating);
+  });
+});
+
+// ==============================
+// ⭐ FILL STAR FUNCTION
+// ==============================
+function fillStars(count) {
+  stars.forEach((star, index) => {
+    star.classList.remove("fa-solid");
+    star.classList.add("fa-regular");
+
+    if (index < count) {
+      star.classList.remove("fa-regular");
+      star.classList.add("fa-solid");
+    }
+  });
+}
+
+// ==============================
+// ⭐ SUBMIT RATING
+// ==============================
+submitBtn.addEventListener("click", async () => {
+  const token = localStorage.getItem("token");
+
+  if (!token) {
+    msg.innerText = "Please login to rate ❗";
+    return;
+  }
+
+  if (!selectedRating) {
+    msg.innerText = "Please select rating ⭐";
+    return;
+  }
+
+  try {
+    const res = await fetch("https://kivan-backend.onrender.com/api/ratings", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        productId,
+        rating: selectedRating,
+      }),
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      msg.innerText = data.message || "Rating failed";
+      return;
+    }
+
+    msg.innerText = "Thanks for your rating ❤️";
+    submitBtn.disabled = true;
+
+    // ⭐ rating submit হওয়ার পর avg rating reload
+    fetchAverageRating();
+
+  } catch (err) {
+    msg.innerText = "Server error";
+  }
+});
+
+// ==============================
+// ⭐ FETCH AVERAGE RATING
+// ==============================
+async function fetchAverageRating() {
+  try {
+    const res = await fetch(
+      `https://kivan-backend.onrender.com/api/ratings/${productId}`
+    );
+    const data = await res.json();
+
+    if (!avgRatingEl) return;
+
+    if (data.total === 0) {
+      avgRatingEl.innerText = "No ratings yet";
+      fillStars(0);
+    } else {
+      avgRatingEl.innerText = `⭐ ${data.avgRating.toFixed(
+        1
+      )} / 5 (${data.total} reviews)`;
+
+      // ⭐⭐⭐ AUTO STAR FILL (MAIN FIX)
+      fillStars(Math.round(data.avgRating));
+    }
+  } catch (err) {
+    console.error("Average rating error", err);
+  }
+}
+
+// ==============================
+// 🔥 PAGE LOAD এ AVG RATING
+// ==============================
+fetchAverageRating();
