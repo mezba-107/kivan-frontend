@@ -3,7 +3,6 @@ const galleryPreview = document.getElementById("galleryPreview");
 
 let oldGallery = [];
 
-
 /* ===============================
    ✅ BASIC SETUP
 ================================ */
@@ -22,7 +21,6 @@ const productId = params.get("id");
 // ✅ পুরানো image path রাখার জন্য
 let oldImagePath = "";
 
-
 /* ===============================
    ✅ LOAD PRODUCT DATA
 ================================ */
@@ -31,44 +29,36 @@ async function loadProduct() {
   const res = await fetch(`https://kivan-backend.onrender.com/api/products/${productId}`);
   const p = await res.json();
 
-  // input গুলোতে data বসানো
   document.getElementById("name").value = p.name;
   document.getElementById("price").value = p.price;
   document.getElementById("description").value = p.description || "";
 
-  // ✅ পুরানো image remember করা
-  oldImagePath = p.image;
-
-  // ✅ previous image preview দেখানো
-  if (p.image) {
-    imagePreview.src = `https://kivan-backend.onrender.com${p.image}`;
+  // ✅ main image
+  oldImagePath = p.image?.url || "";
+  if (p.image?.url) {
+    imagePreview.src = p.image.url;
     imagePreview.style.display = "block";
   }
 
-  // ✅ OLD GALLERY LOAD + PREVIEW
-if (p.gallery && p.gallery.length > 0) {
-  oldGallery = p.gallery;
-  galleryPreview.innerHTML = "";
+  // ✅ gallery preview
+  if (p.gallery && p.gallery.length > 0) {
+    oldGallery = p.gallery;
+    galleryPreview.innerHTML = "";
 
-  p.gallery.forEach(img => {
-    const image = document.createElement("img");
-    image.src = `https://kivan-backend.onrender.com${img}`;
-    image.style.width = "80px";
-    image.style.height = "80px";
-    image.style.objectFit = "cover";
-    image.style.borderRadius = "6px";
+    p.gallery.forEach(img => {
+      const image = document.createElement("img");
+      image.src = img.url;
+      image.style.width = "80px";
+      image.style.height = "80px";
+      image.style.objectFit = "cover";
+      image.style.borderRadius = "6px";
 
-    galleryPreview.appendChild(image);
-  });
-
+      galleryPreview.appendChild(image);
+    });
+  }
 }
-
-}
-
-
 
 loadProduct();
-
 
 /* ===============================
    ✅ IMAGE PREVIEW (NEW IMAGE)
@@ -82,112 +72,63 @@ imageInput.addEventListener("change", () => {
   }
 });
 
-
 /* ===============================
-   ✅ UPDATE PRODUCT
+   ✅ UPDATE PRODUCT (FIXED)
 ================================ */
 
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
 
+  const loader = document.getElementById("loadingOverlay");
+  loader.style.display = "flex"; // ✅ SHOW LOADER
+
   try {
-    let imagePath = oldImagePath;
+    const formData = new FormData();
 
-    // ✅ যদি নতুন image select করা হয়
+    formData.append("name", document.getElementById("name").value);
+    formData.append("price", document.getElementById("price").value);
+    formData.append(
+      "description",
+      document.getElementById("description").value
+    );
+
     if (imageInput.files.length > 0) {
-      const imgForm = new FormData();
-      imgForm.append("image", imageInput.files[0]);
-
-      const uploadRes = await fetch(
-        "https://kivan-backend.onrender.com/api/upload/product",
-        {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${token}`
-          },
-          body: imgForm
-        }
-      );
-
-      const uploadData = await uploadRes.json();
-      if (!uploadRes.ok) throw new Error("Image upload failed");
-
-      imagePath = uploadData.image;
+      formData.append("image", imageInput.files[0]);
     }
 
-    /* ===============================
-   ✅ GALLERY UPLOAD (ADD HERE 👈)
-================================ */
-
-// 👉 যদি নতুন gallery select করা হয়
-if (galleryInput.files.length > 0) {
-  const galleryForm = new FormData();
-
-  Array.from(galleryInput.files).forEach(file => {
-    galleryForm.append("gallery", file);
-  });
-
-  const galleryRes = await fetch(
-    "https://kivan-backend.onrender.com/api/upload/gallery",
-    {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${token}`
-      },
-      body: galleryForm
+    if (galleryInput.files.length > 0) {
+      Array.from(galleryInput.files).forEach(file => {
+        formData.append("gallery", file);
+      });
     }
-  );
-
-  const galleryData = await galleryRes.json();
-  if (!galleryRes.ok) throw new Error("Gallery upload failed");
-
-  // 👉 old gallery replace হবে
-  oldGallery = galleryData.images;
-}
-
-
-    // ✅ update request
-    const updatedProduct = {
-      name: document.getElementById("name").value,
-      price: document.getElementById("price").value,
-      description: document.getElementById("description").value,
-      image: imagePath,
-      gallery: oldGallery
-    };
 
     const res = await fetch(
       `https://kivan-backend.onrender.com/api/products/${productId}`,
       {
         method: "PUT",
         headers: {
-          "Content-Type": "application/json",
           Authorization: `Bearer ${token}`
         },
-        body: JSON.stringify(updatedProduct)
+        body: formData
       }
     );
 
     if (!res.ok) throw new Error("Update failed");
 
+    loader.style.display = "none"; // ✅ HIDE LOADER
+
     showPopup(
       "success",
       "Product Updated Successfully",
       "/Admin/admin-products.html"
-);
+    );
 
-
-} catch (err) {
-  console.error(err);
-
-  showPopup(
-    "error",
-    "Product Update Failed. Please try again."
-  );
-}
-
-
+  } catch (err) {
+    loader.style.display = "none"; // ❌ error হলেও hide
+    console.error(err);
+    showPopup("error", "Product Update Failed. Please try again.");
+  }
 });
-
 
 /* ===============================
   ✅ GALLERY PREVIEW (NEW SELECT)
@@ -208,14 +149,9 @@ galleryInput.addEventListener("change", () => {
   });
 });
 
-
-
-
-
 /* ===============================
   ✅ POPUP FUNCTIONALITY
 ================================ */
-
 
 function showPopup(type, message, redirect = null) {
   const overlay = document.getElementById("popupOverlay");

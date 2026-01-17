@@ -31,13 +31,15 @@ async function fetchSingleProduct() {
     document.getElementById("title").innerText = product.name;
     document.getElementById("price").innerText = "৳" + product.price;
     document.getElementById("desc").innerText = product.description;
-    document.getElementById("ProductImg").src =
-      "https://kivan-backend.onrender.com" + product.image;
+document.getElementById("ProductImg").src =
+  product.image?.url || "/images/no-image.png";
+
 
       // ✅ SET FOR CART (IMPORTANT)
 productName = product.name;
 price = product.price;
-image = "https://kivan-backend.onrender.com" + product.image;
+image = product.image?.url || "/images/no-image.png";
+
 
 
     // ==============================
@@ -49,13 +51,14 @@ image = "https://kivan-backend.onrender.com" + product.image;
 
       product.gallery.forEach(img => {
         const image = document.createElement("img");
-        image.src = "https://kivan-backend.onrender.com" + img;
+        image.src = img?.url || "/images/no-image.png";
+
         image.width = 80;
         image.style.cursor = "pointer";
 
         image.onclick = () => {
           document.getElementById("ProductImg").src =
-            "https://kivan-backend.onrender.com" + img;
+            img.url || "/images/no-image.png";
         };
 
         gallery.appendChild(image);
@@ -98,7 +101,8 @@ container.innerHTML += `
   <div class="col-4">
     <div class="related-card">
       <a href="/product/single-product.html?id=${p._id}">
-        <img src="https://kivan-backend.onrender.com${p.image}" alt="${p.name}">
+        <img src="${p.image?.url || "/images/no-image.png"}" alt="${p.name}">
+
       </a>
 
       <h4>${p.name}</h4>

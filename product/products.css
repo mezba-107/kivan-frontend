@@ -10,6 +10,8 @@ body{
     color: var(--text-colour);
 }
 
+
+
 /* ==================================
    📱 MOBILE MENU – FINAL FIX
 ================================== */
@@ -19,6 +21,7 @@ body{
   /* 🌞 LIGHT MODE */
   body:not(.darkmode) nav ul#MenuItems {
     background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(18px);
     box-shadow: 0 18px 45px rgba(0,0,0,0.18);
     border-radius: 0 0 22px 22px;
   }
@@ -30,6 +33,7 @@ body{
   /* 🌙 DARK MODE */
   body.darkmode nav ul#MenuItems {
     background: rgba(16, 20, 37, 0.95);
+    backdrop-filter: blur(18px);
     box-shadow: 0 18px 45px rgba(0,0,0,0.6);
   }
 
@@ -49,6 +53,7 @@ body{
     font-weight: 500;
   }
 }
+
 
 /* ===============================
    🌟 NAVBAR BEAUTIFICATION (FIXED)

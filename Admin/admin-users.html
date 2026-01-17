@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Admin | Users</title>
+
+  <!-- Admin Theme CSS -->
+  <link rel="stylesheet" href="/Admin/admin-nav.css">
+  <link rel="stylesheet" href="/Admin/admin-users.css">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <div id="admin-navbar"></div>
+
+  <!-- ================= USERS PAGE ================= -->
+  <div class="users-page">
+    <h2>👥 User Management</h2>
+
+    <div class="users-table-wrapper">
+      <table class="users-table">
+        <thead>
+          <tr>
+            <th>Profile</th>
+            <th>User Name</th>
+            <th>Mobile</th>
+            <th>Address</th>
+            <th>City</th>
+            <th>Total Orders</th>
+            <th>Role</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+
+        <tbody id="usersTableBody">
+          <!-- JS will inject users -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+<!-- ================= VIEW ORDERS MODAL ================= -->
+<div id="ordersModal" class="modal">
+  <div class="modal-box large">
+
+    <h3>📦 User Orders</h3>
+
+    <div id="ordersContainer"></div>
+
+    <button class="close-btn" onclick="closeOrders()">Close</button>
+  </div>
+</div>
+
+
+<!-- Toast Notification -->
+<div id="successPopup" class="popup-overlay">
+  <div class="popup-box">
+    <div class="popup-icon">✔</div>
+    <h3>Success</h3>
+    <p id="popupMessage">Role updated successfully</p>
+    <button onclick="closePopup()">OK</button>
+  </div>
+</div>
+
+
+
+
+  <!-- JS -->
+  <script src="/Admin/admin-nav.js"></script>
+  <script src="/Admin/admin-users.js"></script>
+
+</body>
+</html>

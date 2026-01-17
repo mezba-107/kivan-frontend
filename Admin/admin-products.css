@@ -309,3 +309,39 @@ h2 {
     opacity: 1;
   }
 }
+
+
+
+/* =========================
+   DELETE BUTTON LOADING
+========================= */
+
+.yes-btn {
+  position: relative;
+  min-width: 100px;
+}
+
+.btn-loader {
+  width: 18px;
+  height: 18px;
+  border: 2px solid #fff;
+  border-top: 2px solid transparent;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  display: none;
+  margin: auto;
+}
+
+.yes-btn.loading .btn-text {
+  display: none;
+}
+
+.yes-btn.loading .btn-loader {
+  display: inline-block;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

@@ -293,3 +293,114 @@ tfoot td{
 
 
 
+/* ================= MOBILE INVOICE FIX (CSS ONLY) ================= */
+
+@media (max-width: 600px) {
+
+  body{
+    padding: 12px;
+  }
+
+  .container{
+    padding: 0;
+  }
+
+  .card{
+    padding: 16px;
+    border-radius: 16px;
+  }
+
+  /* TABLE WRAP FIX */
+  table{
+    width:100%;
+    display:block;
+  }
+
+  thead{
+    display:none;
+  }
+
+  tbody{
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+  }
+
+  tbody tr{
+    display:block;
+    background:#fff8f6;
+    border-radius:14px;
+    padding:12px;
+  }
+
+  tbody td{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:12px;
+    padding:6px 0;
+    border:none;
+    font-size:14px;
+  }
+
+  /* LEFT LABEL (auto via nth-child) */
+  tbody td:nth-child(1)::before{content:"Item";}
+  tbody td:nth-child(2)::before{content:"Qty";}
+  tbody td:nth-child(3)::before{content:"Price";}
+  tbody td:nth-child(4)::before{content:"Tax";}
+  tbody td:nth-child(5)::before{content:"Amount";}
+
+  tbody td::before{
+    font-weight:600;
+    color:var(--primary);
+    min-width:80px;
+  }
+
+  tbody td:nth-child(1){
+    flex-direction:column;
+    align-items:flex-start;
+    gap:6px;
+  }
+
+  tbody td:nth-child(1)::before{
+    content:"Item Description";
+  }
+
+  /* PRICE ALIGN FIX */
+  .right,
+  .center{
+    text-align:right;
+    white-space:nowrap;
+  }
+
+  /* TOTAL SECTION */
+  tfoot{
+    display:block;
+    margin-top:16px;
+  }
+
+  tfoot tr{
+    display:flex;
+    justify-content:space-between;
+    padding:6px 0;
+  }
+
+  .total-row{
+    border-radius:10px;
+    padding:10px;
+  }
+
+  /* BUTTON FIX */
+  .actions{
+    width:100%;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:12px;
+  }
+
+  .actions a,
+  .actions button{
+    width:100%;
+    justify-content:center;
+  }
+}

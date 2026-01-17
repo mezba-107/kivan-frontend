@@ -173,3 +173,36 @@ Neon Bottom Line
 
   box-shadow: 0 0 10px rgba(255,82,59,.8);
 }
+
+
+
+/* =========================
+   Order Badge
+========================= */
+
+.nav-orders {
+  position: relative;
+  padding-right: 26px;
+}
+
+.order-badge {
+  position: absolute;
+  top: -6px;
+  right: -8px;
+
+  background: #00e676; /* green for orders */
+  color: #000;
+
+  font-size: 11px;
+  font-weight: bold;
+
+  min-width: 18px;
+  height: 18px;
+  border-radius: 50%;
+
+  display: none; /* default hidden */
+  align-items: center;
+  justify-content: center;
+
+  box-shadow: 0 0 10px rgba(0,230,118,.8);
+}

@@ -6,45 +6,7 @@
   font-family: "Poppins", sans-serif;
 }
 
-/* ==================================
-   📱 MOBILE MENU – FINAL FIX
-================================== */
 
-@media only screen and (max-width: 800px) {
-
-  /* 🌞 LIGHT MODE */
-  body:not(.darkmode) nav ul#MenuItems {
-    background: rgba(255, 255, 255, 0.92);
-    box-shadow: 0 18px 45px rgba(0,0,0,0.18);
-    border-radius: 0 0 22px 22px;
-  }
-
-  body:not(.darkmode) nav ul#MenuItems li a {
-    color: #111;
-  }
-
-  /* 🌙 DARK MODE */
-  body.darkmode nav ul#MenuItems {
-    background: rgba(16, 20, 37, 0.95);
-    box-shadow: 0 18px 45px rgba(0,0,0,0.6);
-  }
-
-  body.darkmode nav ul#MenuItems li a {
-    color: #fff;
-  }
-
-}
-
-/* ===============================
-   📱 MOBILE NAV TEXT – LIGHT MODE
-================================ */
-
-@media only screen and (max-width: 800px) {
-  body:not(.darkmode) nav ul#MenuItems li a {
-    color: #111 !important;
-    font-weight: 500;
-  }
-}
 
 /* ===============================
    🌟 NAVBAR BEAUTIFICATION (FIXED)
@@ -150,8 +112,6 @@ nav ul li a.active {
 .menu-icon:hover {
     transform: scale(1.15);
 }
-
-
 
 
 
@@ -618,6 +578,7 @@ body {
 }
 
 
+
 /* ==================== CITY SELECT ==================== */
 .info-box select {
   width: 100%;
@@ -649,14 +610,120 @@ body {
   box-shadow: 0 0 12px rgba(255,106,85,0.8);
 }
 
+/* ==================================
+   📱 MOBILE MENU – FINAL FIX
+================================== */
+
+@media only screen and (max-width: 800px) {
+
+  /* 🌞 LIGHT MODE */
+  body:not(.darkmode) nav ul#MenuItems {
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(18px);
+    box-shadow: 0 18px 45px rgba(0,0,0,0.18);
+    border-radius: 0 0 22px 22px;
+  }
+
+  body:not(.darkmode) nav ul#MenuItems li a {
+    color: #111;
+  }
+
+  /* 🌙 DARK MODE */
+  body.darkmode nav ul#MenuItems {
+    background: rgba(16, 20, 37, 0.95);
+    backdrop-filter: blur(18px);
+    box-shadow: 0 18px 45px rgba(0,0,0,0.6);
+  }
+
+  body.darkmode nav ul#MenuItems li a {
+    color: #fff;
+  }
+
+}
+
+/* ===============================
+   📱 MOBILE NAV TEXT – LIGHT MODE
+================================ */
+
+@media only screen and (max-width: 800px) {
+  body:not(.darkmode) nav ul#MenuItems li a {
+    color: #111 !important;
+    font-weight: 500;
+  }
+}
 
 
 
+/* ===============================
+   PROFILE IMAGE LOADER (THEME AWARE)
+================================ */
 
+.loading-overlay {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  z-index: 9999;
+  backdrop-filter: blur(8px);
+  transition: all 0.3s ease;
+}
 
+/* 🌙 DARK MODE */
+body.darkmode .loading-overlay {
+  background: rgba(0, 0, 0, 0.65);
+}
 
+body.darkmode .loading-overlay p {
+  color: #f2f2f2;
+}
 
+/* ☀️ LIGHT MODE */
+body:not(.darkmode) .loading-overlay {
+  background: rgba(255, 255, 255, 0.75);
+}
 
+body:not(.darkmode) .loading-overlay p {
+  color: #222;
+}
+
+/* ===============================
+   SPINNER
+================================ */
+
+.loader {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: 4px solid transparent;
+  border-top: 4px solid #ff523b;
+  border-right: 4px solid #ff523b;
+  animation: spin 0.9s linear infinite;
+  box-shadow: 0 0 20px rgba(255, 82, 59, 0.35);
+}
+
+/* ===============================
+   TEXT
+================================ */
+
+.loading-overlay p {
+  margin-top: 14px;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.4px;
+  opacity: 0.9;
+}
+
+/* ===============================
+   ANIMATION
+================================ */
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
 
 
 

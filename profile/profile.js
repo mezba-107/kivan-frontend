@@ -44,10 +44,8 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  
- /* ===================== PROFILE IMAGE LOAD ===================== */
-
-  async function loadProfileImage() {
+/* ===================== PROFILE IMAGE LOAD ===================== */
+async function loadProfileImage() {
   const token = localStorage.getItem("token");
   if (!token) return;
 
@@ -60,42 +58,51 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const userData = await res.json();
 
-    if (userData.profileImage) {
-      document.getElementById("profile-img").src =
-        `https://kivan-backend.onrender.com/uploads/profile/${userData.profileImage}`;
+    if (userData.profileImage?.url) {
+      document.getElementById("profile-img").src = userData.profileImage.url;
     }
   } catch (err) {
     console.error("Failed to load profile image", err);
   }
 }
 
-
- /* ===================== PROFILE IMAGE UPLOAD ===================== */
-
+/* ===================== PROFILE IMAGE UPLOAD ===================== */
 const uploadInput = document.getElementById("upload-photo");
 const profileImg = document.getElementById("profile-img");
 
 uploadInput.addEventListener("change", async () => {
+  const token = localStorage.getItem("token");
+
+  if (!token) {
+    Swal.fire("Error", "Session expired. Please login again.", "error");
+    return;
+  }
+
   const file = uploadInput.files[0];
   if (!file) return;
 
+  const loader = document.getElementById("profileLoader");
+  loader.style.display = "flex";
+
   const formData = new FormData();
-  formData.append("image", file);
+  formData.append("profile", file);
 
   try {
-    const res = await fetch("https://kivan-backend.onrender.com/api/auth/update-profile-image", {
+    const res = await fetch("https://kivan-backend.onrender.com/api/auth/profile-pic", {
       method: "PUT",
       headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        Authorization: `Bearer ${token}`, // ✅ SAFE
       },
       body: formData,
     });
 
+
     const data = await res.json();
 
+    loader.style.display = "none"; // ✅ HIDE LOADER
+
     if (res.ok) {
-      // ✅ instant preview
-      profileImg.src = `https://kivan-backend.onrender.com/uploads/profile/${data.image}`;
+      profileImg.src = data.profileImage.url;
 
       Swal.fire({
         icon: "success",
@@ -107,6 +114,7 @@ uploadInput.addEventListener("change", async () => {
       Swal.fire("Error", data.message, "error");
     }
   } catch (err) {
+    loader.style.display = "none"; // ❌ error হলেও hide
     console.error(err);
     Swal.fire("Error", "Image upload failed", "error");
   }
@@ -114,6 +122,8 @@ uploadInput.addEventListener("change", async () => {
 
 
 loadProfileImage();
+
+
 
 
 /* ===================== EDIT USERNAME ===================== */
@@ -238,7 +248,6 @@ document.getElementById("save-city-btn").addEventListener("click", async () => {
 // LOAD CITY ON PAGE LOAD
 const citySelect = document.getElementById("city-select");
 citySelect.value = user.city || "";
-
 
 
 // SAVE ADDRESS

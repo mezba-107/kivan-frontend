@@ -32,7 +32,7 @@ function setProducts(rowSelector, products) {
     const price = card.querySelector("p");
 
     link.href = `/product/single-product.html?id=${p._id}`;
-    img.src = `https://kivan-backend.onrender.com${p.image}`;
+    img.src = p.image?.url || "/images/no-image.png";
     title.innerText = p.name;
     price.innerText = `৳ ${p.price}`;
   });

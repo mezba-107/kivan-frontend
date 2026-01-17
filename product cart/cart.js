@@ -98,7 +98,7 @@ document.addEventListener("DOMContentLoaded", function () {
         row.innerHTML = `
           <td>
             <div class="cart-info">
-              <img src="https://kivan-backend.onrender.com${item.image}" width="80">
+              <img src="${item.image?.url || item.image}" width="80">
               <div>
                 <p>${item.name}</p>
                 <small>Size: ${item.size}</small><br>
@@ -353,7 +353,7 @@ if (confirmBtn) {
       cart = (data.items || []).map(item => ({
         id: item.product._id,
         name: item.product.name,
-        image: `https://kivan-backend.onrender.com${item.product.image}`, // 🔥 FIX
+        image: item.product.image?.url || item.product.image,
         price: item.price,
         quantity: item.qty,
         size: item.size
@@ -615,23 +615,40 @@ document.getElementById("invPayment").addEventListener("change", function () {
 
 
 // ================================
-// LOGIN/GUEST POPUP
-// ================================ 
+// LOGIN / GUEST POPUP
+// ================================
 
-// Popup selectors
+// selectors
 const lgPopup = document.getElementById("loginGuestPopup");
+const lgBox = document.querySelector(".lg-box");
 const lgLoginBtn = document.getElementById("lgLoginBtn");
 const lgGuestBtn = document.getElementById("lgGuestBtn");
 
-// LOGIN → go to login page
-lgLoginBtn.onclick = () => {
-    window.location.href = "/Account/account.html";
+// LOGIN → account page
+lgLoginBtn.onclick = (e) => {
+  e.stopPropagation(); // popup close trigger হবে না
+  window.location.href = "/Account/account.html";
 };
 
-// GUEST → redirect to new guest order page
-lgGuestBtn.onclick = () => {
-    window.location.href = "/Guest/guest-order.html";
+// GUEST → guest order page
+lgGuestBtn.onclick = (e) => {
+  e.stopPropagation();
+  window.location.href = "/Guest/guest-order.html";
 };
+
+// click outside → popup off
+lgPopup.addEventListener("click", (e) => {
+  if (!lgBox.contains(e.target)) {
+    lgPopup.style.display = "none";
+  }
+});
+
+// ESC → popup off
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    lgPopup.style.display = "none";
+  }
+});
 
 
 

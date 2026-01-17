@@ -20,45 +20,6 @@ body{
     color: var(--text-colour);
 }
 
-/* ==================================
-   📱 MOBILE MENU – FINAL FIX
-================================== */
-
-@media only screen and (max-width: 800px) {
-
-  /* 🌞 LIGHT MODE */
-  body:not(.darkmode) nav ul#MenuItems {
-    background: rgba(255, 255, 255, 0.92);
-    box-shadow: 0 18px 45px rgba(0,0,0,0.18);
-    border-radius: 0 0 22px 22px;
-  }
-
-  body:not(.darkmode) nav ul#MenuItems li a {
-    color: #111;
-  }
-
-  /* 🌙 DARK MODE */
-  body.darkmode nav ul#MenuItems {
-    background: rgba(16, 20, 37, 0.95);
-    box-shadow: 0 18px 45px rgba(0,0,0,0.6);
-  }
-
-  body.darkmode nav ul#MenuItems li a {
-    color: #fff;
-  }
-
-}
-
-/* ===============================
-   📱 MOBILE NAV TEXT – LIGHT MODE
-================================ */
-
-@media only screen and (max-width: 800px) {
-  body:not(.darkmode) nav ul#MenuItems li a {
-    color: #111 !important;
-    font-weight: 500;
-  }
-}
 
 /* =========================================================
    🔥 CART PAGE – PREMIUM UI UPGRADE (ALL IN ONE)
@@ -1885,3 +1846,69 @@ th:last-child{
 
 
 
+/* ==================================
+   📱 MOBILE MENU – FINAL FIX
+================================== */
+
+@media only screen and (max-width: 800px) {
+
+  /* 🌞 LIGHT MODE */
+  body:not(.darkmode) nav ul#MenuItems {
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(18px);
+    box-shadow: 0 18px 45px rgba(0,0,0,0.18);
+    border-radius: 0 0 22px 22px;
+  }
+
+  body:not(.darkmode) nav ul#MenuItems li a {
+    color: #111;
+  }
+
+  /* 🌙 DARK MODE */
+  body.darkmode nav ul#MenuItems {
+    background: rgba(16, 20, 37, 0.95);
+    backdrop-filter: blur(18px);
+    box-shadow: 0 18px 45px rgba(0,0,0,0.6);
+  }
+
+  body.darkmode nav ul#MenuItems li a {
+    color: #fff;
+  }
+
+}
+
+/* ===============================
+   📱 MOBILE NAV TEXT – LIGHT MODE
+================================ */
+
+@media only screen and (max-width: 800px) {
+  body:not(.darkmode) nav ul#MenuItems li a {
+    color: #111 !important;
+    font-weight: 500;
+  }
+}
+
+
+/* Dark mode modal text fix */
+body.darkmode .modal-box p {
+  color: #ffffff; /* pure white */
+}
+
+
+.lg-popup {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: none; /* open করলে flex */
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.lg-box {
+  background: #fff;
+  padding: 24px;
+  border-radius: 12px;
+  max-width: 400px;
+  width: 90%;
+}

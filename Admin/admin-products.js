@@ -31,8 +31,19 @@ const cancelBtn = document.getElementById("cancelDelete");
 =============================== */
 
 async function loadProducts() {
-  const res = await fetch("https://kivan-backend.onrender.com/api/products");
+  const res = await fetch("https://kivan-backend.onrender.com/api/products", {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  });
+
+  if (!res.ok) {
+    alert("Access denied");
+    return;
+  }
+
   const products = await res.json();
+
 
   productsDiv.innerHTML = "";
 
@@ -40,19 +51,18 @@ async function loadProducts() {
     productsDiv.innerHTML += `
       <div class="product-card" id="p-${p._id}">
 
-        <!-- ✅ PRODUCT IMAGE -->
+        <!-- ✅ MAIN IMAGE -->
         <img 
-          src="https://kivan-backend.onrender.com${p.image}"
+          src="${p.image?.url || '/images/no-image.png'}"
           class="product-img"
-          onerror="this.src='/images/no-image.png'"
         />
 
-        <!-- ✅ PRODUCT GALLERY -->
-        ${p.gallery && p.gallery.length > 0 ? `
+        <!-- ✅ GALLERY -->
+        ${p.gallery && p.gallery.length ? `
           <div class="product-gallery">
             ${p.gallery.map(img => `
               <img 
-                src="https://kivan-backend.onrender.com${img}"
+                src="${img.url}"
                 onerror="this.src='/images/no-image.png'"
               />
             `).join("")}
@@ -62,22 +72,14 @@ async function loadProducts() {
         <!-- ✅ PRODUCT INFO -->
         <div class="product-info">
           <h3 class="product-name">${p.name}</h3>
-
-          <p class="product-desc">
-            ${p.description || "No description"}
-          </p>
-
+          <p class="product-desc">${p.description || "No description"}</p>
           <p class="product-price">৳${p.price}</p>
 
-          <button 
-            class="edit-btn"
-            onclick="openEdit('${p._id}')">
+          <button class="edit-btn" onclick="openEdit('${p._id}')">
             ✏️ Edit
           </button>
 
-          <button 
-            class="delete-btn"
-            onclick="deleteProduct('${p._id}')">
+          <button class="delete-btn" onclick="deleteProduct('${p._id}')">
             ❌ Delete
           </button>
         </div>
@@ -106,17 +108,39 @@ cancelBtn.addEventListener("click", () => {
 });
 
 confirmBtn.addEventListener("click", async () => {
-  const res = await fetch(`https://kivan-backend.onrender.com/api/products/${deleteId}`, {
-    method: "DELETE",
-    headers: { Authorization: `Bearer ${token}` },
-  });
+  if (!deleteId) return;
 
-  if (res.ok) {
-    document.getElementById(`p-${deleteId}`).remove();
+  // 🔄 loading start
+  confirmBtn.classList.add("loading");
+  confirmBtn.disabled = true;
+
+  try {
+    const res = await fetch(
+      `https://kivan-backend.onrender.com/api/products/${deleteId}`,
+      {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    if (res.ok) {
+      document.getElementById(`p-${deleteId}`)?.remove();
+    } else {
+      alert("Delete failed");
+    }
+  } catch (err) {
+    alert("Server error");
   }
 
+  // 🔄 reset
+  confirmBtn.classList.remove("loading");
+  confirmBtn.disabled = false;
   modal.style.display = "none";
+  deleteId = null;
 });
+
 
 /* ===============================
    ✅ EDIT PRODUCT PAGE OPEN
